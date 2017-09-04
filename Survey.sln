@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Survey", "QuestionnaireSurvey\Survey.csproj", "{CF084F1D-891D-4330-9430-3CE66A3AE988}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Survey", "Survey\Survey.csproj", "{CF084F1D-891D-4330-9430-3CE66A3AE988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyTest", "QuestionnaireSurveyTest\SurveyTest.csproj", "{C2A2A474-8D94-4581-AB27-1AA60647E5CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyTest", "SurveyTest\SurveyTest.csproj", "{C2A2A474-8D94-4581-AB27-1AA60647E5CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
