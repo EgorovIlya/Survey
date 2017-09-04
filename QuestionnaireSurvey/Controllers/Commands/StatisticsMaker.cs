@@ -15,7 +15,7 @@ namespace QuestionnaireSurvey.Controllers.Commands
     {
         public StatisticsMaker()
         {
-            Name = CommandsList.CommandSave;
+            CommandName = CommandsList.CommandSave;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace QuestionnaireSurvey.Controllers.Commands
         [Dependency]
         public IWriterAndReader WriterAndReaderWorker { get; set; }
 
-        public string Name { get; }
+        public string CommandName { get; }
 
         public void Execute()
         {

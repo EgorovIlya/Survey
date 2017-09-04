@@ -1,17 +1,20 @@
 ﻿using System;
-
 using QuestionnaireSurvey.Controllers.Commands;
 using QuestionnaireSurvey.Interface;
 using Microsoft.Practices.Unity;
-using QuestionnaireSurvey.ModelsDTO;
 using QuestionnaireSurvey.Utils;
 
 namespace QuestionnaireSurvey.Controllers
 {
     public class Controller
     {
+
         #region Constructors
 
+        /// <summary>
+        ///      Initializes a new instance of the Controller using the specified IUnityContainer.
+        /// </summary>
+        /// <param name="unityContainer">the specified IUnityContainer</param>
         public Controller(IUnityContainer unityContainer)
         {
             m_UnityContainer = unityContainer;
@@ -19,12 +22,12 @@ namespace QuestionnaireSurvey.Controllers
 
         #endregion Constructors
 
-    #region Properties
+        #region Public Properties
 
-    [Dependency]
+        [Dependency]
         public ICommand Command { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -35,7 +38,7 @@ namespace QuestionnaireSurvey.Controllers
         }
 
         /// <summary>
-        ///     Sets command, if User input will be correct.
+        ///     Sets command, if User input is correct.
         /// </summary>
         /// <param name="userInput">User input.</param>
         public void SetCommand(string userInput)
@@ -45,12 +48,12 @@ namespace QuestionnaireSurvey.Controllers
 
             else if (userInput== CommandsList.CommandSave)
                 Command = m_Profile!=null 
-                    ? m_UnityContainer.Resolve<ICommand>(CommandsList.CommandSave,new ParameterOverride("WorkingProfile", m_Profile)) 
+                    ? m_UnityContainer.Resolve<ICommand>(CommandsList.CommandSave,new ParameterOverride(SurveyConst.WorkingProfile, m_Profile)) 
                     : m_UnityContainer.Resolve<ICommand>(CommandsList.CommandSave);
             else if (userInput.Contains(CommandsList.CommandNewProfile))
             {
                 m_Profile = m_UnityContainer.Resolve<IProfile>();
-                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandNewProfile, new ParameterOverride("WorkingProfile", m_Profile));
+                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandNewProfile, new ParameterOverride(SurveyConst.WorkingProfile, m_Profile));
             }
 
             else if (userInput == CommandsList.CommandExit)
@@ -60,33 +63,31 @@ namespace QuestionnaireSurvey.Controllers
                 Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandStatistic);
 
             else if (userInput.Contains(CommandsList.CommandFind))
-                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandFind
-                                            , new ParameterOverride("command", userInput)
-                                            , new ParameterOverride("name", CommandsList.CommandFind));
+                Command = ResolveFileWorker(CommandsList.CommandFind,userInput);
 
             else if (userInput.Contains(CommandsList.CommandDelete))
-                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandDelete
-                                            ,new ParameterOverride("command", userInput)
-                                            , new ParameterOverride("name", CommandsList.CommandDelete));
-
+                Command = ResolveFileWorker(CommandsList.CommandDelete, userInput);
+           
             else if (userInput == CommandsList.CommandList)
-                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandList
-                                            , new ParameterOverride("command", userInput)
-                                            , new ParameterOverride("name", CommandsList.CommandList));
-
+                Command = ResolveFileWorker(CommandsList.CommandList, userInput);
 
             else if (userInput == CommandsList.CommandListToday)
-                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandListToday
-                                            , new ParameterOverride("command", userInput)
-                                            , new ParameterOverride("name", CommandsList.CommandListToday));
+                Command = ResolveFileWorker(CommandsList.CommandListToday, userInput);
 
             else if (userInput == CommandsList.CommandZip)
                 Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandZip
-                                            , new ParameterOverride("command", userInput));
+                                            , new ParameterOverride(SurveyConst.UserInput, userInput));
             else
                 Command = m_UnityContainer.Resolve<ICommand>();
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
+        /// <summary>
+        ///     Executes assigned  command.
+        /// </summary>
         private void Execute()
         {
             try
@@ -111,18 +112,36 @@ namespace QuestionnaireSurvey.Controllers
             string userInput = Console.ReadLine();
             SetCommand(userInput);
             Execute();
-
         }
 
-        #endregion Public Methods
+        /// <summary>
+        ///     Returns  implementation of FileWorker by using constructor with specified commandName and userInput.
+        /// </summary>
+        /// <param name="commandName">the name of the ommand</param>
+        /// <param name="userInput">user input</param>
+        /// <returns></returns>
+        private ICommand ResolveFileWorker(string commandName , string userInput)
+        {
+            return m_UnityContainer.Resolve<ICommand>(commandName
+                , new ParameterOverride(SurveyConst.UserInput, userInput)
+                , new ParameterOverride(SurveyConst.CommandName, commandName));
+        }
 
-        #region Fields
+        #endregion Private Methods
 
-        IProfile m_Profile;
+        #region Private Properties
+        /// <summary>
+        ///     
+        /// </summary>
+        private IProfile m_Profile;
+
+        /// <summary>
+        ///     
+        /// </summary>
         private readonly IUnityContainer m_UnityContainer;
-       
-        #endregion Fields
-       
+
+        #endregion Private Properties
+
 
     }
 }

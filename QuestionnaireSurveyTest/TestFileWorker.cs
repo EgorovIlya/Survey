@@ -339,9 +339,9 @@ namespace QuestionnaireSurveyTest
         private void GetFileWorker(string input, string command)
         {
             var fwICommand = m_container.Resolve<ICommand>(command
-                , new ParameterOverride("command", input)
-                , new ParameterOverride("name", command)
-                , new PropertyOverride("WriterAndReaderWorker", m_Writer.Object));
+                , new ParameterOverride(SurveyConst.UserInput, input)
+                , new ParameterOverride(SurveyConst.CommandName, command)
+                , new PropertyOverride(SurveyConst.WriterAndReaderWorker, m_Writer.Object));
 
             m_FileWorker = fwICommand as FileWorker;
             Assert.AreNotEqual(null, m_FileWorker, "Ошибка при DI. Проверить настройки UNITY");

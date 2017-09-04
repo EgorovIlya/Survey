@@ -1,8 +1,16 @@
 ﻿namespace QuestionnaireSurvey.Interface
 {
+    
     public interface ICommand
     {
-        string Name { get; }
+        /// <summary>
+        ///     Represents the command name.
+        /// </summary>
+        string CommandName { get; }
+
+        /// <summary>
+        ///     Executes assigned command.
+        /// </summary>
         void Execute();
     }
 }

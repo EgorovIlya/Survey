@@ -13,7 +13,7 @@
 
         #endregion Constructors
 
-        #region Properties
+        #region Public Properties
         /// <summary>
         ///     Question name.
         /// </summary>
@@ -24,8 +24,7 @@
         /// </summary>
         public string QuestionText { get; set; }
 
-
-        #endregion Properties
+        #endregion Public Properties
 
         #region Public Methods
         /// <summary>

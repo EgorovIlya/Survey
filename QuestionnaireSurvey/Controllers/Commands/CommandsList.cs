@@ -64,17 +64,18 @@ namespace QuestionnaireSurvey.Controllers.Commands
         /// </summary>
         public const string CommandZip = "cmd: -zip";
 
-
-
         /// <summary>
         ///     Exit.
         /// </summary>
         public const string CommandExit = "cmd: -exit";
 
+
+        /// <summary>
+        ///     Gets the list of the commands and text with description.
+        /// </summary>
         public static Dictionary<string, string> CommandsListDict = new Dictionary<string, string>()
         {
             {CommandNewProfile, "- Заполнить новую анкету"},
-          
             {CommandStatistic, "- Показать статистику всех заполненных анкет"},
             {CommandSave, "- Сохранить заполненную анкету"},
             {CommandProfileGoToQuestion, "<Номер вопроса> - Вернуться к указанному вопросу (Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)"},
@@ -85,7 +86,7 @@ namespace QuestionnaireSurvey.Controllers.Commands
             {CommandList, "- Показать список названий файлов всех сохранённых анкет"},
             {CommandListToday, "- Показать список названий файлов всех сохранённых анкет, созданных сегодня"},
             {CommandZip,"<Имя файла анкеты> <Путь для сохранения архива> - Запаковать указанную анкету в архив и сохранить архив по указанному пути" },
-           {CommandHelp, "- Показать список доступных команд с описанием"},
+            {CommandHelp, "- Показать список доступных команд с описанием"},
             { CommandExit, "- Выйти из приложения"},
         };
 

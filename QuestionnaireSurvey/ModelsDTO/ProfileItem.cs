@@ -4,9 +4,8 @@ namespace QuestionnaireSurvey.ModelsDTO
 {
     public class ProfileItem
     {
-        public ProfileQuestion Question { get; set; }
 
-        public string Answer { get; set; } = "";
+        #region Constructors
 
         public ProfileItem(ProfileQuestion question)
         {
@@ -18,5 +17,15 @@ namespace QuestionnaireSurvey.ModelsDTO
             Question = question;
             Answer = answer;
         }
+
+        #endregion Constructors
+
+        #region Public Properties
+
+        public ProfileQuestion Question { get; set; }
+
+        public string Answer { get; set; } = "";
+
+        #endregion Public Properties
     }
 }

@@ -9,6 +9,9 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
 {
     public class QuestionInt:ProfileQuestion
     {
+
+        #region Constructors
+
         public QuestionInt(string name, string question) : base(name, question)
         {
         }
@@ -19,10 +22,17 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
             MinValue = min;
         }
 
+        #endregion Constructors
+
+        #region Public Properties
+
         public int MaxValue { get; set; } = int.MaxValue;
 
         public int MinValue { get; set; } = int.MinValue;
 
+        #endregion Public Properties
+
+        #region Public Methods
         /// <summary>
         ///     Checks answer for correctness.
         /// </summary>
@@ -50,6 +60,8 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
             return answer;
         }
 
-        
+        #endregion Public Methods
+
+
     }
 }

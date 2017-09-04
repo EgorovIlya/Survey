@@ -12,6 +12,7 @@ using QuestionnaireSurvey.Controllers;
 using QuestionnaireSurvey.Controllers.Commands;
 using QuestionnaireSurvey.Interface;
 using QuestionnaireSurvey.ModelsDTO;
+using QuestionnaireSurvey.Utils;
 
 namespace QuestionnaireSurveyTest
 {
@@ -94,8 +95,8 @@ namespace QuestionnaireSurveyTest
             controller.SetCommand(command);
             Type typeWasSet = controller.Command.GetType();
             Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandDelete 
-                , new ParameterOverride("command", command)
-                , new ParameterOverride("name", command)).GetType();
+                , new ParameterOverride(SurveyConst.UserInput, command)
+                , new ParameterOverride(SurveyConst.CommandName, command)).GetType();
 
             //Assert
             Assert.AreEqual(typeMustSet, typeWasSet);
@@ -114,8 +115,8 @@ namespace QuestionnaireSurveyTest
             controller.SetCommand(command);
             Type typeWasSet = controller.Command.GetType();
             Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandList
-                , new ParameterOverride("command", command)
-                , new ParameterOverride("name", command)).GetType();
+                , new ParameterOverride(SurveyConst.UserInput, command)
+                , new ParameterOverride(SurveyConst.CommandName, command)).GetType();
 
             //Assert
             Assert.AreEqual(typeMustSet, typeWasSet);
@@ -134,8 +135,8 @@ namespace QuestionnaireSurveyTest
             controller.SetCommand(command);
             Type typeWasSet = controller.Command.GetType();
             Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandFind
-                    ,new ParameterOverride("command", command)
-                    , new ParameterOverride("name", command))
+                    ,new ParameterOverride(SurveyConst.UserInput, command)
+                    , new ParameterOverride(SurveyConst.CommandName, command))
                 .GetType();
 
             //Assert
@@ -173,8 +174,8 @@ namespace QuestionnaireSurveyTest
             controller.SetCommand(command);
             Type typeWasSet = controller.Command.GetType();
             Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandListToday
-                    , new ParameterOverride("command", command)
-                    , new ParameterOverride("name", command))
+                    , new ParameterOverride(SurveyConst.UserInput, command)
+                    , new ParameterOverride(SurveyConst.CommandName, command))
                 .GetType();
 
             //Assert

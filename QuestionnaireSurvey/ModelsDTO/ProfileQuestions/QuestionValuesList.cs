@@ -9,10 +9,22 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
 {
     public class QuestionValuesList:ProfileQuestion
     {
+        #region Constructors
+
         public QuestionValuesList(string name, string question, List<string> values) : base(name, question)
         {
             ChekingValues = values;
         }
+
+        #endregion Constructors
+
+        #region Public Properties
+
+        public List<string> ChekingValues { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         /// <summary>
         ///     Checks answer for correctness.
@@ -42,6 +54,7 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
             return answerText;
         }
 
-        public List<string> ChekingValues { get; set; }
+        #endregion Public Methods
+
     }
 }

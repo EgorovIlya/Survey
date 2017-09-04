@@ -6,6 +6,8 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
 {
     public class QuestionDate:ProfileQuestion
     {
+        #region Constructors
+
         public QuestionDate(string name, string question) : base(name, question)
         {
         }
@@ -16,10 +18,17 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
             MinDate = min;
         }
 
+        #endregion Constructors
+
+        #region Public Properties
 
         public DateTime MaxDate { get; set; } = DateTime.MaxValue;
 
         public DateTime MinDate { get; set; } = DateTime.MinValue;
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         /// <summary>
         ///     Checks answer for correctness.
@@ -52,6 +61,8 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
             return answerText;
         }
 
-       
+        #endregion Public Methods
+
+
     }
 }

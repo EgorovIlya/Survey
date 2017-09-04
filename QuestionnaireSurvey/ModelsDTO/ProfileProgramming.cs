@@ -29,7 +29,6 @@ namespace QuestionnaireSurvey.ModelsDTO
                 new ProfileItem( new QuestionPhoneNumber("Мобильный телефон", "Укажите номер мобильного телефона")),
             }
             , Guid.NewGuid().ToString())
-        {
-        }
+        {}
     }
 }

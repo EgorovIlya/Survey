@@ -14,19 +14,19 @@ namespace QuestionnaireSurvey.Class.Commands
 
         public EmptyCommand()
         {
-            Name = "";
+            CommandName = "";
         }
 
         #endregion Constructors
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Returns name of command.
         /// </summary>
-        public string Name { get; }
+        public string CommandName { get; }
 
-        #endregion Properties
+        #endregion Public Properties
 
         #region Public Methods
 

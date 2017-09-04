@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using QuestionnaireSurvey.Interface;
 using QuestionnaireSurvey.Utils;
 
@@ -12,28 +7,50 @@ namespace QuestionnaireSurvey.Controllers.Commands
 {
     public class ArchiveMaker:ICommand
     {
+        #region Constructors
+        /// <summary>
+        ///      Initializes a new instance of the ArchiveMaker.
+        /// </summary>
         public ArchiveMaker()
         {
-            Name = CommandsList.CommandZip;
+            CommandName = CommandsList.CommandZip;
         }
-
-        public ArchiveMaker(string command)
-        {
-            Name = CommandsList.CommandZip;
-            m_Command = command;
-        }
-
-        public string Name { get; }
-        public string PathToResults { get; set; } = SurveyConst.DirectoryName;
 
         /// <summary>
-        ///     ICommmand implementation.
+        ///      Initializes a new instance of the ArchiveMaker using the assigned userInput.
+        /// </summary>
+        public ArchiveMaker(string userInput)
+        {
+            CommandName = CommandsList.CommandZip;
+            m_UserInput = userInput;
+        }
+
+        #endregion Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        ///     Represents the userInput name.
+        /// </summary>
+        public string CommandName { get; }
+
+        /// <summary>
+        ///     Represents the path to the result directory.
+        /// </summary>
+        public string PathToResults { get; set; } = SurveyConst.DirectoryName;
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        ///     ICommmand implementation. Crerates archive from specified profile.
         /// </summary>
         public void Execute()
         {
             CheckDir(PathToResults);
 
-            string profileAndPathToSave = Tools.GetTextWithoutCommand(m_Command, CommandsList.CommandZip);
+            string profileAndPathToSave = Tools.GetTextWithoutCommand(m_UserInput, CommandsList.CommandZip);
             string[] data = profileAndPathToSave.Split(' ');
 
             if(data.Length!=2)
@@ -64,6 +81,10 @@ namespace QuestionnaireSurvey.Controllers.Commands
 
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
         /// <summary>
         ///      Checks whether the directory exists.
         /// </summary>
@@ -84,9 +105,11 @@ namespace QuestionnaireSurvey.Controllers.Commands
                 throw new SurveyException($"{ErrorMessages.FileNotExists}.{fullPath}");
         }
 
+        #endregion Private Methods
+
         /// <summary>
-        ///     Users command.
+        ///     Users userInput.
         /// </summary>
-        private string m_Command;
+        private string m_UserInput;
     }
 }

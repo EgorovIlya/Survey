@@ -1,36 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using QuestionnaireSurvey.Interface;
-using QuestionnaireSurvey.ModelsDTO;
 using QuestionnaireSurvey.Utils;
 
 namespace QuestionnaireSurvey.Controllers.Commands
 {
     public class Saver:ICommand
     {
+        #region Constructors
+
+        /// <summary>
+        ///      Initializes a new instance of the Saver.
+        /// </summary>
+        public Saver()
+        {
+            CommandName = CommandsList.CommandSave;
+        }
+
+        #endregion Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        ///     Represents a profile, that must be saved.
+        /// </summary>
         [Dependency]
         public IProfile WorkingProfile { get; set; }
 
-        public Saver()
-        {
-            Name = CommandsList.CommandSave;
-        }
+        /// <summary>
+        ///     Represents a command from commandList.
+        /// </summary>
+        public string CommandName { get; set; }
 
-        public string Name { get; }
-        public string PathToResults { get; set; } = Path.Combine(Directory.GetCurrentDirectory(),SurveyConst.DirectoryName);
+        /// <summary>
+        ///     Represnts a path to the result directory. 
+        /// </summary>
+        public string PathToResults { get; set; } = SurveyConst.DirectoryName;
 
+        #endregion Public Properties
+
+        #region Public Methods
+
+
+        /// <summary>
+        ///     ICommand implementation. Saves the specified profile.
+        /// </summary>
         public void Execute()
         {
             CheckProfile();
             Save();
         }
 
-        public void Save()
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void Save()
         {
             if (!Directory.Exists(PathToResults))
             {
@@ -61,6 +88,8 @@ namespace QuestionnaireSurvey.Controllers.Commands
                 throw new SurveyException(ErrorMessages.ProfileIsNotCorrect);
             }
         }
-        
+
+        #endregion Private Methods
+
     }
 }

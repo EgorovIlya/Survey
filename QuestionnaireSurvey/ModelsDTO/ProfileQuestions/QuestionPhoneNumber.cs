@@ -10,9 +10,13 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
 {
     public class QuestionPhoneNumber:ProfileQuestion
     {
-        public QuestionPhoneNumber(string name, string question) : base(name, question)
-        {
-        }
+        #region Constructors
+
+        public QuestionPhoneNumber(string name, string question) : base(name, question) {}
+
+        #endregion Constructors
+
+        #region Public Methods
 
         /// <summary>
         ///     Checks answer for correctness.
@@ -30,5 +34,7 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
 
             return answer;
         }
+
+        #endregion Public Methods
     }
 }

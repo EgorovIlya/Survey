@@ -9,11 +9,23 @@ namespace QuestionnaireSurvey.Controllers.Commands
     public class ProfileConroller:ICommand
     {
 
+        #region Constructors
+
+        /// <summary>
+        ///      Initializes a new instance of the Saver.
+        /// </summary>
         public ProfileConroller()
         {
-            Name = CommandsList.CommandNewProfile;
+            CommandName = CommandsList.CommandNewProfile;
         }
 
+        #endregion Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        ///     Represents a profile, that must be saved.
+        /// </summary>
         [Dependency]
         public IProfile WorkingProfile { get; set; }
 
@@ -23,20 +35,28 @@ namespace QuestionnaireSurvey.Controllers.Commands
         [Dependency]
         public IWriterAndReader WriterAndReaderWorker { get; set; }
 
-
         /// <summary>
-        ///     Name of ICommand implementations.
+        ///     CommandName of ICommand implementations.
         /// </summary>
-        public string Name { get; }
+        public string CommandName { get; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         /// <summary>
-        ///     Interface ICommand implementations.
+        ///     ICommand implementations. Starts profile editing.
         /// </summary>
         public void Execute()
         {
             Initialize();
         }
-        
+
+        #endregion Public Methods
+
+
+        #region Private Methods
+
         /// <summary>
         ///     Initialize ProfileController.
         /// </summary>
@@ -211,9 +231,25 @@ namespace QuestionnaireSurvey.Controllers.Commands
             m_CurrProfileItem = WorkingProfile.Items[i];
         }
 
-       internal int m_CurrIndex;
-       internal ProfileItem m_CurrProfileItem;
-       internal bool m_ProfileComplete;
+        #endregion Private Methods
+
+        #region Private Properties
+        /// <summary>
+        ///     Index of the current profile item.
+        /// </summary>
+        internal int m_CurrIndex;
+
+        /// <summary>
+        ///     Current profile item.
+        /// </summary>
+        internal ProfileItem m_CurrProfileItem;
+
+        /// <summary>
+        ///     
+        /// </summary>
+        internal bool m_ProfileComplete;
+
+        #endregion Private Properties
     }
 
 }

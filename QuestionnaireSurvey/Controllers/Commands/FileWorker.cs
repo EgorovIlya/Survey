@@ -2,61 +2,91 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using QuestionnaireSurvey.Interface;
 using QuestionnaireSurvey.Utils;
 
 namespace QuestionnaireSurvey.Controllers.Commands
 {
+    /// <summary>
+    ///     Represents a class that can works with saved profile.
+    /// </summary>
     public class FileWorker:ICommand
     {
-       
-        public FileWorker(string name)
-        {
-            Name = name;
-        }
+        #region Constructors
 
-        [InjectionConstructor]
-        public FileWorker(string command,string name)
+        /// <summary>
+        ///      Initializes a new instance of the FileWorker using the specified command name.
+        /// </summary>
+        /// <param name="commandName">element of command list</param>
+        public FileWorker(string commandName)
         {
-            Name = name;
-            m_Command = command;
+            CommandName = commandName;
         }
 
         /// <summary>
-        ///     Method for writting results.
+        ///      Initializes a new instance of the FileWorker  using the specified command name and full command.
+        /// </summary>
+        /// <param name="userInput">user input</param>
+        /// <param name="commandName">element of command list</param>
+        [InjectionConstructor]
+        public FileWorker(string userInput,string commandName)
+        {
+            CommandName = commandName;
+            m_UserInput = userInput;
+        }
+
+        #endregion Constructors
+
+        #region Public Properties
+
+        /// <summary>
+        ///     Represents a method for writting results and reads user input.
         /// </summary>
         [Dependency]
         public IWriterAndReader WriterAndReaderWorker { get; set; }
-        public string Name { get; set; } 
+
+        /// <summary>
+        ///     Represents a command from commandList.
+        /// </summary>
+        public string CommandName { get; set; } 
+
+        /// <summary>
+        ///     Represnts a path to the result directory. 
+        /// </summary>
         public string PathToResults { get; set; } = SurveyConst.DirectoryName;
 
+        #endregion Public Properties
+
+        #region Public Methods
+
+        /// <summary>
+        ///     Finds saved profiles, shows depending on the entered command
+        /// </summary>
         public void Execute()
         {
             if (!CheckDir()) return;
             
-            if (m_Command.Contains(CommandsList.CommandFind) || m_Command.Contains(CommandsList.CommandDelete))
+            if (m_UserInput.Contains(CommandsList.CommandFind) || m_UserInput.Contains(CommandsList.CommandDelete))
             {
-                string fileName = Tools.GetTextWithoutCommand(m_Command, Name);
+                string fileName = Tools.GetTextWithoutCommand(m_UserInput, CommandName);
                 string fullPath = Path.Combine(PathToResults, $"{fileName}.txt");
 
                 if (!FileTxtExists(fullPath)) return;
 
-                if(m_Command.Contains(CommandsList.CommandFind))
+                if(m_UserInput.Contains(CommandsList.CommandFind))
                       VeiwProfile(fullPath);
 
-                if (m_Command.Contains(CommandsList.CommandDelete))
+                if (m_UserInput.Contains(CommandsList.CommandDelete))
                     File.Delete(fullPath);
             }
-            else if (m_Command==CommandsList.CommandList  || m_Command==CommandsList.CommandListToday)
+            else if (m_UserInput==CommandsList.CommandList  || m_UserInput==CommandsList.CommandListToday)
             {
                 GetFiles(PathToResults);
 
-                if (m_Command==CommandsList.CommandList)
+                if (m_UserInput==CommandsList.CommandList)
                     GetAllSavedProfile();
-                else if (m_Command==CommandsList.CommandListToday)
+                else if (m_UserInput==CommandsList.CommandListToday)
                     GetTodaySavedProfile();
             }
             else
@@ -65,6 +95,14 @@ namespace QuestionnaireSurvey.Controllers.Commands
             }
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+        /// <summary>
+        ///     Checks if the file exists.
+        /// </summary>
+        /// <param name="fullPath">path to the profile</param>
+        /// <returns></returns>
         private bool FileTxtExists(string fullPath)
         {
            var result = File.Exists(fullPath);
@@ -73,6 +111,10 @@ namespace QuestionnaireSurvey.Controllers.Commands
             return result;
         }
 
+        /// <summary>
+        ///     Reads lines form file, and shows them in the console.
+        /// </summary>
+        /// <param name="fullPath">path to the profile</param>
         private void VeiwProfile(string fullPath)
         {
             using (StreamReader r = new StreamReader(fullPath,  true))
@@ -85,6 +127,10 @@ namespace QuestionnaireSurvey.Controllers.Commands
             }
         }
 
+        /// <summary>
+        ///     Checks if directory exists.
+        /// </summary>
+        /// <returns></returns>
         private bool CheckDir()
         {
             var result = Directory.Exists(PathToResults);
@@ -93,6 +139,9 @@ namespace QuestionnaireSurvey.Controllers.Commands
             return result;
         }
 
+        /// <summary>
+        ///     Gets list of files in the result directory.
+        /// </summary>
         private void GetAllSavedProfile()
         {
             foreach (var file in m_files)
@@ -101,6 +150,9 @@ namespace QuestionnaireSurvey.Controllers.Commands
             }
         }
 
+        /// <summary>
+        ///     Gets profiles, that was saved today.
+        /// </summary>
         private void GetTodaySavedProfile()
         {
             foreach (var file in m_files)
@@ -112,13 +164,28 @@ namespace QuestionnaireSurvey.Controllers.Commands
             }
         }
 
+        /// <summary>
+        ///     Gets all saved profiles.
+        /// </summary>
         private void GetFiles(string path)
         {
             m_files = Directory.GetFiles(path).OrderBy(n=>n).ToList();
         }
 
-        private  List<string> m_files;
+        #endregion Private Methods
 
-        private string m_Command;
+        #region Private Properties
+
+        /// <summary>
+        ///     The list of the files.
+        /// </summary>
+        private List<string> m_files;
+
+        /// <summary>
+        ///     The user input.
+        /// </summary>
+        private readonly string m_UserInput;
+
+        #endregion Private Properties
     }
 }

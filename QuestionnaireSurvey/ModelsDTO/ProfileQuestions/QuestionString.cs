@@ -1,11 +1,10 @@
-﻿using System;
-using System.Globalization;
-using QuestionnaireSurvey.Utils;
+﻿using QuestionnaireSurvey.Utils;
 
 namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
 {
     public class QuestionString : ProfileQuestion
     {
+        #region Constructors
 
         public QuestionString(string name, string question) : base(name, question)
         {
@@ -18,6 +17,10 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
             MinLength = minLength;
         }
 
+        #endregion Constructors
+
+        #region Public Properties
+
         /// <summary>
         ///     Max lenght.
         /// </summary>
@@ -27,6 +30,11 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
         ///     Min lenght.
         /// </summary>
         public int MinLength { get; set; } = 0;
+
+        #endregion Public Properties
+
+
+        #region Public Methods
 
         /// <summary>
         ///     Checks answer for correctness.
@@ -47,6 +55,8 @@ namespace QuestionnaireSurvey.ModelsDTO.ProfileQuestions
 
             return answerText;
         }
+
+        #endregion Public Methods
 
 
     }

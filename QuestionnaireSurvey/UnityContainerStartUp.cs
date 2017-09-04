@@ -16,18 +16,6 @@ namespace QuestionnaireSurvey
     {
         public static void RegisterTypes(IUnityContainer container)
         {
-            //container.RegisterType<ICommand, ProfileConroller>(CommandsList.CommandNewProfile,
-            //             new InjectionProperty("WorkingProfile",
-            //                new ResolvedParameter<IProfile>()));
-
-            //container.RegisterType<ICommand, Saver>(CommandsList.CommandSave,
-            //    new InjectionProperty("WorkingProfile",
-            //        new ResolvedParameter<IProfile>()));
-
-            //container.RegisterType<ICommand, Helper>(CommandsList.CommandHelp,
-            //    new InjectionProperty("WriterAndReaderWorker",
-            //        new ResolvedParameter<IWriterAndReader>()));
-
             container.RegisterType<ICommand, EmptyCommand>()
                 .RegisterType<ICommand, Helper>(CommandsList.CommandHelp)
                 .RegisterType<ICommand, ProfileConroller>(CommandsList.CommandNewProfile)
@@ -35,10 +23,10 @@ namespace QuestionnaireSurvey
                 .RegisterType<ICommand, Exiter>(CommandsList.CommandExit)
                 .RegisterType<ICommand, ArchiveMaker>(CommandsList.CommandZip)
                 .RegisterType<ICommand, StatisticsMaker>(CommandsList.CommandStatistic)
-                .RegisterType<ICommand, FileWorker>(CommandsList.CommandFind/*, new InjectionConstructor("name",CommandsList.CommandFind)*/)
-                .RegisterType<ICommand, FileWorker>(CommandsList.CommandDelete/*,, new InjectionConstructor(CommandsList.CommandDelete)*/)
-                .RegisterType<ICommand, FileWorker>(CommandsList.CommandList/*,, new InjectionConstructor(CommandsList.CommandList)*/)
-                .RegisterType<ICommand, FileWorker>(CommandsList.CommandListToday/*,, new InjectionConstructor(CommandsList.CommandListToday)*/)
+                .RegisterType<ICommand, FileWorker>(CommandsList.CommandFind)
+                .RegisterType<ICommand, FileWorker>(CommandsList.CommandDelete)
+                .RegisterType<ICommand, FileWorker>(CommandsList.CommandList)
+                .RegisterType<ICommand, FileWorker>(CommandsList.CommandListToday)
                 ;
 
             container.RegisterType<IProfile, ProfileProgramming>();

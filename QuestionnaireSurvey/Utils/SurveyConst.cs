@@ -20,6 +20,29 @@ namespace QuestionnaireSurvey.Utils
         public const string OutputMessageMaxExpPerson = "Самый опытный программист:";
         public const string OutputMessageAverageAge = "Средний возраст всех опрошенных:";
         public const string OutputMessageProgrammingLang = "Самый популярный язык программирования:";
+
+        //Constr parametrs name
+
+        /// <summary>
+        ///     Name of property. Writer and reader.
+        /// </summary>
+        public const string WriterAndReaderWorker = "WriterAndReaderWorker";
+
+       
+        /// <summary>
+        ///     Name of property. Working profile.
+        /// </summary>
+        public const string WorkingProfile = "WorkingProfile";
+
+        /// <summary>
+        ///     Constructor parametr name. The name of the command (from CommandDict).
+        /// </summary>
+        public const string CommandName = "commandName";
+
+        /// <summary>
+        ///      Constructor parametr name. User input.
+        /// </summary>
+        public const string UserInput = "userInput";
     }
 
 }

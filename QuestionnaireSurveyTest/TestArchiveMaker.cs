@@ -54,7 +54,7 @@ namespace QuestionnaireSurveyTest
         public void Start()
         {
             var saver1 = m_container.Resolve<ICommand>(CommandsList.CommandSave
-                , new PropertyOverride("WorkingProfile", m_profile1Mock.Object));
+                , new PropertyOverride(SurveyConst.WorkingProfile, m_profile1Mock.Object));
 
             Saver saver = saver1 as Saver;
             saver.Execute();
@@ -101,7 +101,7 @@ namespace QuestionnaireSurveyTest
         ///      Checks that an exception will be thrown when profile does not exists.   
         /// </summary>
         [Test]
-        public void TestIfProfileNotRxistsReturnException()
+        public void TestIfProfileNotExistsReturnException()
         {
             //Arrange
             string commandText = $"{CommandsList.CommandZip} wrongFrofileName {m_fullPathToArchive}";
@@ -141,7 +141,7 @@ namespace QuestionnaireSurveyTest
         public void TestThatArchiveIsCreated()
         {
             //Arrange
-            string commandText = $"{CommandsList.CommandZip}  {m_profile1Mock.Object.ProfileId} {m_fullPathToArchive}";
+            string commandText = $"{CommandsList.CommandZip} {m_profile1Mock.Object.ProfileId} {m_fullPathToArchive}";
           
             //Act
             GetArchiveMaker(commandText);
@@ -155,7 +155,7 @@ namespace QuestionnaireSurveyTest
         private void GetArchiveMaker(string input)
         {
             var amICommand = m_container.Resolve<ICommand>(CommandsList.CommandZip
-                , new ParameterOverride("command", input)
+                , new ParameterOverride(SurveyConst.UserInput, input)
                 );
 
             m_ArchiveMaker = amICommand as ArchiveMaker;

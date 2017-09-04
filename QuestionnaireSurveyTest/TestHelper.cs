@@ -5,6 +5,7 @@ using NUnit.Framework;
 using QuestionnaireSurvey;
 using QuestionnaireSurvey.Controllers.Commands;
 using QuestionnaireSurvey.Interface;
+using QuestionnaireSurvey.Utils;
 
 
 namespace QuestionnaireSurveyTest
@@ -46,11 +47,12 @@ namespace QuestionnaireSurveyTest
                 ,"cmd: -exit - Выйти из приложения"
 
             };
+            
             //Act
             List<string> helpResived = new List<string>();
             var consoleMock = new Mock<IWriterAndReader>();
             consoleMock.Setup(c => c.WriteLine(It.IsAny<string>())).Callback((string s) => helpResived.Add(s));
-            var helperMoq = m_container.Resolve<ICommand>(CommandsList.CommandHelp, new PropertyOverride("WriterAndReaderWorker", consoleMock.Object));
+            var helperMoq = m_container.Resolve<ICommand>(CommandsList.CommandHelp, new PropertyOverride(SurveyConst.WriterAndReaderWorker, consoleMock.Object));
             helperMoq.Execute();
 
             //Assert

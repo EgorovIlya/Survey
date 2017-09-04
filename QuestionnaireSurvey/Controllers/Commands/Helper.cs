@@ -8,37 +8,43 @@ namespace QuestionnaireSurvey.Controllers.Commands
     {
 
         #region Constructors
-
-
+        /// <summary>
+        ///      Initializes a new instance of the Saver.
+        /// </summary>
         public Helper()
         {
-            Name = CommandsList.CommandHelp;
+            CommandName = CommandsList.CommandHelp;
         }
 
         #endregion Constructors
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
-        ///     Returns name of command.
+        ///     Represents a name of command.
         /// </summary>
-        public string Name { get; }
-
+        public string CommandName { get; }
 
         /// <summary>
-        ///     Method for writting results.
+        ///   Represents a method for writting results and reads user input.
         /// </summary>
         [Dependency]
         public IWriterAndReader WriterAndReaderWorker { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
 
         #region Public Methods
 
+        /// <summary>
+        ///     ICommand implementation.
+        /// </summary>
         public void Execute()
         {
             ShowHelp();
         }
+        #endregion Public Methods
+
+        #region Private Methods
 
         /// <summary>
         ///     Shows list of the commands.
@@ -51,8 +57,7 @@ namespace QuestionnaireSurvey.Controllers.Commands
             }
         }
 
-        #endregion Public Methods
-
+        #endregion Private Methods
 
     }
 }

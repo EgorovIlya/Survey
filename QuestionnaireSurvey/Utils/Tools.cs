@@ -7,8 +7,18 @@ using System.Threading.Tasks;
 
 namespace QuestionnaireSurvey.Utils
 {
-    public static class Tools
+
+    /// <summary>
+    ///      Initializes a new instance of the FileWorker using the specified command name.
+    /// </summary>
+   public static class Tools
     {
+
+        /// <summary>
+        ///     Returns text, that corresponds to the number of years.
+        /// </summary>
+        /// <param name="years">the number of years</param>
+        /// <returns></returns>
         public static string GetYears(int years)
         {
             if ((years - 11) % 100 == 0)
@@ -38,6 +48,12 @@ namespace QuestionnaireSurvey.Utils
                 return "лет";
         }
 
+        /// <summary>
+        ///     Returns user input without command.
+        /// </summary>
+        /// <param name="text">user input</param>
+        /// <param name="command">command</param>
+        /// <returns></returns>
         public static string GetTextWithoutCommand(string text, string command)
         {
             string result = "";
