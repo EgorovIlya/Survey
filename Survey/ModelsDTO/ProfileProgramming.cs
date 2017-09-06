@@ -20,7 +20,7 @@ namespace Survey.ModelsDTO
                     , new List<string> {"PHP", "JavaScript", "C", "C++", "Java", "C#", "Python", "Ruby" } )),
 
                 new ProfileItem( new QuestionInt("Опыт программирования на указанном языке"
-                    , "Введите опыт программирования на указанном языке (Полных лет)",SurveyConst.MaximumLifeSpan,0)),
+                    , "Введите опыт программирования на указанном языке (Полных лет)",0,SurveyConst.MaximumLifeSpan)),
 
                 new ProfileItem( new QuestionPhoneNumber("Мобильный телефон", "Укажите номер мобильного телефона")),
             }
