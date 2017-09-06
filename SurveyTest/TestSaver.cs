@@ -35,7 +35,6 @@ namespace SurveyTest
                
             });
             m_profileEmptyMock.Setup(a => a.ProfileId).Returns("123-123-123456-1");
-           
 
             m_profilePartiallyCompletedMock.Setup(a => a.Items).Returns(new List<ProfileItem>()
             {
@@ -69,6 +68,9 @@ namespace SurveyTest
 
         }
 
+        /// <summary>
+        ///     Cleans test data after each test is run.
+        /// </summary>
         [TearDown]
         public void CleanUp()
         {
@@ -88,9 +90,8 @@ namespace SurveyTest
             }
         }
 
-
         /// <summary>
-        ///     Checks that the exception was thrown when trying to save an empty profile.  
+        ///     Checks that the exception will thrown when trying to save an empty profile.  
         /// </summary>
         [Test]
         public void TestTryingSaveEmptyProfileReturnException()
@@ -107,7 +108,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks that the exception was thrown when trying to save an partially completed profile.  
+        ///     Checks that the exception will thrown when trying to save an partially completed profile.  
         /// </summary>
         [Test]
         public void TestTryingSavePartiallyCompletedReturnException()
@@ -123,7 +124,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks that the exception was thrown when trying to save an partially completed profile.  
+        ///     Checks that the exception will thrown when trying to save an partially completed profile.  
         /// </summary>
         [Test]
         public void TestTryingSaveFullyCompletedReturnFileInResultDirectory()
@@ -155,7 +156,6 @@ namespace SurveyTest
             //Assert
             Assert.AreEqual(expected, actual, "File was not created!!!");
             CollectionAssert.AreEqual(expectedTxt, actualTxt);
-
         }
 
         private IUnityContainer m_container;

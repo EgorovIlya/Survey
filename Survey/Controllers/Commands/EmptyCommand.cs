@@ -7,6 +7,9 @@ namespace Survey.Controllers.Commands
     {
         #region Constructors
 
+        /// <summary>
+        ///      Initializes a new instance of the EmptyCommand.
+        /// </summary>
         public EmptyCommand()
         {
             CommandName = "";
@@ -17,7 +20,7 @@ namespace Survey.Controllers.Commands
         #region Public Properties
 
         /// <summary>
-        ///     Returns name of command.
+        ///     Returns the name of  the command.
         /// </summary>
         public string CommandName { get; }
 
@@ -25,6 +28,9 @@ namespace Survey.Controllers.Commands
 
         #region Public Methods
 
+        /// <summary>
+        ///      The ICommmand implementation. Throws exception.
+        /// </summary>
         public void Execute()
         {
           throw new SurveyException(ErrorMessages.CommandNotCorrect);

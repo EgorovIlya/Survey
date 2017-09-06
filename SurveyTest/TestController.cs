@@ -25,7 +25,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks if command "help" was inputted.  
+        ///     Checks the actions when the "Help" command is entered.
         /// </summary>
         [Test]
         public void TestSetCommandHelpReturnHelper()
@@ -44,7 +44,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks if command "save" was inputted. 
+        ///     Checks the actions when the "Save" command is entered.
         /// </summary>
         [Test]
         public void TestSetCommandSaveReturnSaver()
@@ -62,7 +62,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks if command "new profile" was inputted. 
+        ///      Checks the actions when the "new_profile" command is entered.
         /// </summary>
         [Test]
         public void TestSetCommandNewProfileReturnProfileController()
@@ -80,27 +80,27 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks if command "delete" was inputted. 
+        ///  Checks the actions when the "delete" command is entered.
         /// </summary>
         [Test]
         public void TestSetCommandDeleteReturnFileWorker()
         {
             //Arrange
             string command = CommandsList.CommandDelete;
+            string userInput = $"{command} 123-123-123-1";
             var controller = m_container.Resolve<Controller>();
+            
             //Act
-            controller.SetCommand(command);
-            Type typeWasSet = controller.Command.GetType();
-            Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandDelete 
-                , new ParameterOverride(SurveyConst.UserInput, command)
-                , new ParameterOverride(SurveyConst.CommandName, command)).GetType();
+            controller.SetCommand(userInput);
 
-            //Assert
-            Assert.AreEqual(typeMustSet, typeWasSet);
+            FileWorker fileWorker = controller.Command as FileWorker;
+
+            Assert.AreNotEqual(null, fileWorker,"The instance is not correct");
+            Assert.AreEqual(userInput, fileWorker.UserInput, "User input is not correct");
         }
 
         /// <summary>
-        ///     Checks if command "List" was inputted. 
+        ///     Checks the actions when the "List" command is entered.
         /// </summary>
         [Test]
         public void TestSetCommandListReturnFileWorker()
@@ -110,38 +110,53 @@ namespace SurveyTest
             var controller = m_container.Resolve<Controller>();
             //Act
             controller.SetCommand(command);
-            Type typeWasSet = controller.Command.GetType();
-            Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandList
-                , new ParameterOverride(SurveyConst.UserInput, command)
-                , new ParameterOverride(SurveyConst.CommandName, command)).GetType();
+            FileWorker fileWorker = controller.Command as FileWorker;
 
             //Assert
-            Assert.AreEqual(typeMustSet, typeWasSet);
+            Assert.AreNotEqual(null, fileWorker, "The instance is not correct");
+            Assert.AreEqual(command, fileWorker.UserInput, "User input is not correct");
         }
 
         /// <summary>
-        ///     Checks if command "find" was inputted. 
+        ///     Checks the actions when the "Find" command is entered.
         /// </summary>
         [Test]
         public void TestSetCommandFindReturnFileWorker()
         {
             //Arrange
             string command = CommandsList.CommandFind;
+            string userInput = $"{command} 123-123-123-1";
             var controller = m_container.Resolve<Controller>();
             //Act
-            controller.SetCommand(command);
-            Type typeWasSet = controller.Command.GetType();
-            Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandFind
-                    ,new ParameterOverride(SurveyConst.UserInput, command)
-                    , new ParameterOverride(SurveyConst.CommandName, command))
-                .GetType();
+            controller.SetCommand(userInput);
 
-            //Assert
-            Assert.AreEqual(typeMustSet, typeWasSet);
+            FileWorker fileWorker = controller.Command as FileWorker;
+
+            Assert.AreNotEqual(null, fileWorker, "The instance is not correct");
+            Assert.AreEqual(userInput, fileWorker.UserInput, "User input is not correct");
         }
 
         /// <summary>
-        ///     Checks if command "exit" was inputted. 
+        ///      Checks the actions when the "Zip" command is entered.
+        /// </summary>
+        [Test]
+        public void TestSetCommandArchiveReturnArchiveMaker()
+        {
+            //Arrange
+            string command = CommandsList.CommandZip;
+            string userInput = $"{command} 123-123-123-1 C:\\Arcive.zip";
+            var controller = m_container.Resolve<Controller>();
+            //Act
+            controller.SetCommand(userInput);
+
+            ArchiveMaker archiveMaker = controller.Command as ArchiveMaker;
+
+            Assert.AreNotEqual(null, archiveMaker, "The instance is not correct");
+            Assert.AreEqual(userInput, archiveMaker.UserInput, "User input is not correct");
+        }
+
+        /// <summary>
+        ///     Checks the actions when the "Exit" command is entered. 
         /// </summary>
         [Test]
         public void TestSetCommandExitReturnExiter()
@@ -159,7 +174,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks if command "list today" was inputted. 
+        ///     Checks the actions when the "ListToday" command is entered.
         /// </summary>
         [Test]
         public void TestSetCommandListTodayReturnFileWorker()
@@ -169,36 +184,33 @@ namespace SurveyTest
             var controller = m_container.Resolve<Controller>();
             //Act
             controller.SetCommand(command);
-            Type typeWasSet = controller.Command.GetType();
-            Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandListToday
-                    , new ParameterOverride(SurveyConst.UserInput, command)
-                    , new ParameterOverride(SurveyConst.CommandName, command))
-                .GetType();
+            FileWorker fileWorker = controller.Command as FileWorker;
 
             //Assert
-            Assert.AreEqual(typeMustSet, typeWasSet);
+            Assert.AreNotEqual(null, fileWorker, "The instance is not correct");
+            Assert.AreEqual(command, fileWorker.UserInput, "User input is not correct");
         }
 
         /// <summary>
-        ///     Checks if command "statistic" was inputted. 
+        ///      Checks the actions when the "Statistics" command is entered.
         /// </summary>
         [Test]
-        public void TestSetCommandStatisticReturnStatisticMaker()
+        public void TestSetCommandStatisticsReturnStatisticMaker()
         {
             //Arrange
-            string command = CommandsList.CommandStatistic;
+            string command = CommandsList.CommandStatistics;
             var controller = m_container.Resolve<Controller>();
             //Act
             controller.SetCommand(command);
             Type typeWasSet = controller.Command.GetType();
-            Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandStatistic).GetType();
+            Type typeMustSet = m_container.Resolve<ICommand>(CommandsList.CommandStatistics).GetType();
 
             //Assert
             Assert.AreEqual(typeMustSet, typeWasSet);
         }
 
         /// <summary>
-        ///     Checks if empty was inputted. 
+        ///     Checks the actions when the "Empty" command  is entered.
         /// </summary>
         [Test]
         public void TestSetEmptyReturnEmptyCommand()
@@ -216,7 +228,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks if incorret string was inputted. 
+        ///     Checks when the incorret string is inputted. 
         /// </summary>
         [Test]
         public void TestSetIncorrestInputReturnEmptyCommand()
@@ -234,7 +246,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks commands dictionary. 
+        ///     Checks the commands dictionary. 
         /// </summary>
         [Test]
         public void TestSetFindForgettingCommandsReturnForgettingCommands()

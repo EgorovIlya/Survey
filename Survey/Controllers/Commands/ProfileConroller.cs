@@ -30,13 +30,13 @@ namespace Survey.Controllers.Commands
         public IProfile WorkingProfile { get; set; }
 
         /// <summary>
-        ///     Method for writting results.
+        ///     Represents a method for writing results and reading user input.
         /// </summary>
         [Dependency]
         public IWriterAndReader WriterAndReaderWorker { get; set; }
 
         /// <summary>
-        ///     CommandName of ICommand implementations.
+        ///     Represents a command name.
         /// </summary>
         public string CommandName { get; }
 
@@ -58,7 +58,7 @@ namespace Survey.Controllers.Commands
         #region Private Methods
 
         /// <summary>
-        ///     Initialize ProfileController.
+        ///     Initialize the ProfileController.
         /// </summary>
         private void Initialize()
         {
@@ -68,7 +68,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Takes users answer.
+        ///    Displays the question and receives the response from the user.
         /// </summary>
         /// <param name="q">question</param>
         private void Question(ProfileItem q)
@@ -83,7 +83,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Checks User input. Find command.
+        ///     Checks user input. Find a command.
         /// </summary>
         /// <param name="userInput">User input</param>
         private void CheckInput(string userInput)
@@ -111,7 +111,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Checks answer. If corrtect - goes to the next question. 
+        ///     Checks the answer. If correct - goes to the next question. 
         /// </summary>
         /// <param name="userInput">User input</param>
         private void CheckAnswer(string userInput)
@@ -146,7 +146,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Goes to the previos question.
+        ///     Goes to the previous question.
         /// </summary>
         private void GoToPrevios()
         {
@@ -182,7 +182,7 @@ namespace Survey.Controllers.Commands
         /// <summary>
         ///     Goes to the specified question.
         /// </summary>
-        /// <param name="userInput">User input</param>
+        /// <param name="userInput">user input</param>
         private void GoToTheQuestion(string userInput)
         {
 
@@ -222,9 +222,9 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Sets question by index.
+        ///     Sets the question by the index.
         /// </summary>
-        /// <param name="i">index</param>
+        /// <param name="i">the index</param>
         private void SetCurrIndex(int i)
         {
             m_CurrIndex=i;
@@ -235,17 +235,17 @@ namespace Survey.Controllers.Commands
 
         #region Private Properties
         /// <summary>
-        ///     Index of the current profile item.
+        ///    The index of the current profile item.
         /// </summary>
         internal int m_CurrIndex;
 
         /// <summary>
-        ///     Current profile item.
+        ///    The current profile item.
         /// </summary>
         internal ProfileItem m_CurrProfileItem;
 
         /// <summary>
-        ///     
+        ///     The sign of completeness of the profile.
         /// </summary>
         internal bool m_ProfileComplete;
 

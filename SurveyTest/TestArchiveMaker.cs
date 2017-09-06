@@ -14,13 +14,13 @@ using Survey.Utils;
 namespace SurveyTest
 {
     /// <summary>
-    ///     Tests public  methods of the TestArchiveMaker class.
+    ///     Tests public methods of the TestArchiveMaker class.
     /// </summary>
     [TestFixture]
     public class TestArchiveMaker
     {
         /// <summary>
-        ///     Initializes beginning data before all tests are run.
+        ///     Initializes the beginning data before all tests are run.
         /// </summary>
         [OneTimeSetUp]
         public void Init()
@@ -45,7 +45,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Initializes beginning data before each test is run.
+        ///     Initializes the beginning data before each test is run.
         /// </summary>
         [SetUp]
         public void Start()
@@ -59,7 +59,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Cleans test data after each test is run.
+        ///     Cleans the test data after each test is run.
         /// </summary>
         [OneTimeTearDown]
         public void CleanUp()
@@ -76,9 +76,8 @@ namespace SurveyTest
             Directory.Delete(m_fullPathToDir, true);
         }
 
-
         /// <summary>
-        ///     Checks that an exception  will be thrown when params is not correct.  
+        ///     Checks that an exception will be thrown when params is not correct.  
         /// </summary>
         [Test]
         public void TestIfPararmsNotCorretReturnException()
@@ -114,7 +113,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///      Checks that an exception will be thrown when archive directory  does not exists.   
+        ///      Checks that an exception will be thrown when archive directory does not exists.   
         /// </summary>
         [Test]
         public void TestIfPathForFindFileIsEmptyReturnException()
@@ -150,9 +149,9 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Returns new instance of the ArchiveMaker.
+        ///     Returns a new instance of the ArchiveMaker.
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="input">the user input</param>
         private void GetArchiveMaker(string input)
         {
             var amICommand = m_container.Resolve<ICommand>(CommandsList.CommandZip

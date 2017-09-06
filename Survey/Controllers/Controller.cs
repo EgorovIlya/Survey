@@ -24,6 +24,9 @@ namespace Survey.Controllers
 
         #region Public Properties
 
+        /// <summary>
+        ///     Represents an ICommand object.
+        /// </summary>
         [Dependency]
         public ICommand Command { get; set; }
 
@@ -38,7 +41,7 @@ namespace Survey.Controllers
         }
 
         /// <summary>
-        ///     Sets command, if User input is correct.
+        ///     Sets the command, if user input is correct.
         /// </summary>
         /// <param name="userInput">User input.</param>
         public void SetCommand(string userInput)
@@ -59,24 +62,23 @@ namespace Survey.Controllers
             else if (userInput == CommandsList.CommandExit)
                 Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandExit);
 
-            else if (userInput == CommandsList.CommandStatistic)
-                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandStatistic);
+            else if (userInput == CommandsList.CommandStatistics)
+                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandStatistics);
 
             else if (userInput.Contains(CommandsList.CommandFind))
-                Command = ResolveFileWorker(CommandsList.CommandFind,userInput);
+                Command = Resolve(CommandsList.CommandFind,userInput);
 
             else if (userInput.Contains(CommandsList.CommandDelete))
-                Command = ResolveFileWorker(CommandsList.CommandDelete, userInput);
+                Command = Resolve(CommandsList.CommandDelete, userInput);
            
             else if (userInput == CommandsList.CommandList)
-                Command = ResolveFileWorker(CommandsList.CommandList, userInput);
+                Command = Resolve(CommandsList.CommandList, userInput);
 
             else if (userInput == CommandsList.CommandListToday)
-                Command = ResolveFileWorker(CommandsList.CommandListToday, userInput);
+                Command = Resolve(CommandsList.CommandListToday, userInput);
 
-            else if (userInput == CommandsList.CommandZip)
-                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandZip
-                                            , new ParameterOverride(SurveyConst.UserInput, userInput));
+            else if (userInput.Contains(CommandsList.CommandZip))
+                Command = Resolve(CommandsList.CommandZip, userInput);
             else
                 Command = m_UnityContainer.Resolve<ICommand>();
         }
@@ -86,7 +88,7 @@ namespace Survey.Controllers
         #region Private Methods
 
         /// <summary>
-        ///     Executes assigned  command.
+        ///     Executes the assigned command.
         /// </summary>
         private void Execute()
         {
@@ -115,12 +117,12 @@ namespace Survey.Controllers
         }
 
         /// <summary>
-        ///     Returns  implementation of FileWorker by using constructor with specified commandName and userInput.
+        ///     Returns the ICommand implementation using the constructor with the specified command name and user input.
         /// </summary>
-        /// <param name="commandName">the name of the ommand</param>
+        /// <param name="commandName">the name of the command</param>
         /// <param name="userInput">user input</param>
         /// <returns></returns>
-        private ICommand ResolveFileWorker(string commandName , string userInput)
+        private ICommand Resolve(string commandName , string userInput)
         {
             return m_UnityContainer.Resolve<ICommand>(commandName
                 , new ParameterOverride(SurveyConst.UserInput, userInput)
@@ -131,12 +133,12 @@ namespace Survey.Controllers
 
         #region Private Properties
         /// <summary>
-        ///     
+        ///    The current profile.
         /// </summary>
         private IProfile m_Profile;
 
         /// <summary>
-        ///     
+        ///     The unity container.
         /// </summary>
         private readonly IUnityContainer m_UnityContainer;
 

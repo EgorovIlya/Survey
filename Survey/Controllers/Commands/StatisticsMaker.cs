@@ -18,19 +18,28 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Method for writting results.
+        ///     Represents a method for writing results and reading user input.
         /// </summary>
         [Dependency]
         public IWriterAndReader WriterAndReaderWorker { get; set; }
 
+        /// <summary>
+        ///     Represents a command from commandList.
+        /// </summary>
         public string CommandName { get; }
 
+        /// <summary>
+        ///      The ICommmand implementation. Displays statistics for all saved profiles.
+        /// </summary>
         public void Execute()
         {
             ReadProfiles();
             ShowStat();
         }
 
+        /// <summary>
+        ///     Reads all saved profile.
+        /// </summary>
         private void ReadProfiles()
         {
             var files = Directory.GetFiles(SurveyConst.DirectoryName);
@@ -79,6 +88,9 @@ namespace Survey.Controllers.Commands
             }
         }
 
+        /// <summary>
+        ///     Displays statistics.
+        /// </summary>
         private void ShowStat()
         {
             StringBuilder sb = new StringBuilder();
@@ -128,8 +140,13 @@ namespace Survey.Controllers.Commands
                 sb.Append(m_FIOmaxExp);
 
             WriterAndReaderWorker.WriteLine(sb.ToString());
-      }
-
+        }
+        
+        /// <summary>
+        ///     Gets the age from the specified string.
+        /// </summary>
+        /// <param name="srline">the specified string</param>
+        /// <param name="ages">list of ages</param>
         private void Ages(string srline, ref List<int> ages)
         {
            
@@ -148,6 +165,11 @@ namespace Survey.Controllers.Commands
             ages.Add(year);
         }
 
+        /// <summary>
+        ///     Gets the clear user answer form the specified string.
+        /// </summary>
+        /// <param name="answer"></param>
+        /// <returns></returns>
         private string GetAnswerFormSavedProfile(string answer)
         {
             int lenght = answer.Length;
@@ -160,15 +182,49 @@ namespace Survey.Controllers.Commands
             return answer.Substring(indexSeparator, delta);
         }
 
+        /// <summary>
+        ///     The list of ages.
+        /// </summary>
         List<int> m_Ages = new List<int>();
+        
+        /// <summary>
+        ///     The list of the programming languages.
+        /// </summary>
         List<string> m_Languages = new List<string>();
+
+        /// <summary>
+        ///     The name of the user with maximum experience.
+        /// </summary>
         string m_FIOmaxExp;
+
+        /// <summary>
+        ///     Number of years of maximum experience.
+        /// </summary>
         private int m_MaxExp;
 
+        /// <summary>
+        ///     The name of the question about the birthday.
+        /// </summary>
         private string m_BirthDay = "Дата рождения";
+
+        /// <summary>
+        ///     The name of the question about the programming language.
+        /// </summary>
         private string m_Language = "Любимый язык программирования";
+
+        /// <summary>
+        ///     The name of the question about  experience.
+        /// </summary>
         private string m_Years = "Опыт программирования на указанном языке";
+
+        /// <summary>
+        ///     The name of the question about the name.
+        /// </summary>
         private string m_FIO = "ФИО";
+
+        /// <summary>
+        ///     The separator.
+        /// </summary>
         private string m_Separator = ": ";
     }
 }

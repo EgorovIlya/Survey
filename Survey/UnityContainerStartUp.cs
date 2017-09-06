@@ -15,7 +15,7 @@ namespace Survey
                 .RegisterType<ICommand, Saver>(CommandsList.CommandSave)
                 .RegisterType<ICommand, Exiter>(CommandsList.CommandExit)
                 .RegisterType<ICommand, ArchiveMaker>(CommandsList.CommandZip)
-                .RegisterType<ICommand, StatisticsMaker>(CommandsList.CommandStatistic)
+                .RegisterType<ICommand, StatisticsMaker>(CommandsList.CommandStatistics)
                 .RegisterType<ICommand, FileWorker>(CommandsList.CommandFind)
                 .RegisterType<ICommand, FileWorker>(CommandsList.CommandDelete)
                 .RegisterType<ICommand, FileWorker>(CommandsList.CommandList)

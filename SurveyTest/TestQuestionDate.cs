@@ -83,7 +83,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks if  answer is correct.  
+        ///     Checks if the answer is correct.  
         /// </summary>
         [Test]
         public void TestCorrectAnswerReturnAnswer()

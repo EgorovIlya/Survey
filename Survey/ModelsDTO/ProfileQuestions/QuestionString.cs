@@ -6,11 +6,17 @@ namespace Survey.ModelsDTO.ProfileQuestions
     {
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the QuestionString using the specified name and question.
+        /// </summary>
         public QuestionString(string name, string question) : base(name, question)
         {
            
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the QuestionString using the specified name , the question, the min length and the max length.
+        /// </summary>
         public QuestionString(string name, string question, int minLength, int maxLength):base( name,  question)
         {
             MaxLength = maxLength;
@@ -22,12 +28,12 @@ namespace Survey.ModelsDTO.ProfileQuestions
         #region Public Properties
 
         /// <summary>
-        ///     Max lenght.
+        ///     Max length.
         /// </summary>
         public int MaxLength { get; set; } = int.MaxValue;
 
         /// <summary>
-        ///     Min lenght.
+        ///     The min length.
         /// </summary>
         public int MinLength { get; set; } = 0;
 
@@ -37,10 +43,10 @@ namespace Survey.ModelsDTO.ProfileQuestions
         #region Public Methods
 
         /// <summary>
-        ///     Checks answer for correctness.
+        ///     Checks the answer for correctness.
         /// </summary>
-        /// <param name="answer"> answer</param>
-        /// <returns>correct answer</returns>
+        /// <param name="answer"> the answer</param>
+        /// <returns>the correct answer</returns>
         public override string CheckedAnswer(string answer)
         {
             string answerText = "";

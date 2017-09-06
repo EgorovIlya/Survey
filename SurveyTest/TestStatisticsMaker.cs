@@ -43,7 +43,7 @@ namespace SurveyTest
             m_ExpectedMessage = new List<string>();
             m_OutputMessages.Clear();
 
-            m_StatisticMaker = m_container.Resolve<ICommand>(CommandsList.CommandStatistic
+            m_StatisticMaker = m_container.Resolve<ICommand>(CommandsList.CommandStatistics
                 , new PropertyOverride("WriterAndReaderWorker", m_Writer.Object));
         }
 
@@ -177,6 +177,12 @@ namespace SurveyTest
 
         }
 
+        /// <summary>
+        ///     Creates and saves profiles.
+        /// </summary>
+        /// <param name="profile1">the first profile</param>
+        /// <param name="profile2">the second profile</param>
+        /// <param name="profile3">the third  profile</param>
         private void CreateAndSaveProfiles(List<ProfileItem> profile1, List<ProfileItem> profile2, List<ProfileItem> profile3)
         {
             m_profile1Mock.Setup(a => a.Items).Returns(profile1);

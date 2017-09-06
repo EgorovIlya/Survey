@@ -20,7 +20,7 @@ namespace Survey.Controllers.Commands
         #region Public Properties
 
         /// <summary>
-        ///     Returns name of command.
+        ///     Represents a command from commandList.
         /// </summary>
         public string CommandName { get; }
 
@@ -29,7 +29,7 @@ namespace Survey.Controllers.Commands
         #region Public Methods
 
         /// <summary>
-        ///      Exit from application.
+        ///      Exits from application.
         /// </summary>
         public void Execute()
         {

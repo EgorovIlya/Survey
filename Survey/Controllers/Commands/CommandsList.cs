@@ -37,7 +37,7 @@ namespace Survey.Controllers.Commands
         /// <summary>
         ///     Gets statistics.
         /// </summary>
-        public const string CommandStatistic = "cmd: -statistics";
+        public const string CommandStatistics = "cmd: -statistics";
 
         /// <summary>
         ///     Shows specified profile.
@@ -60,7 +60,7 @@ namespace Survey.Controllers.Commands
         public const string CommandListToday = "cmd: -list_today";
 
         /// <summary>
-        ///   Creates and save profile archive.
+        ///   Creates and saves profile archive.
         /// </summary>
         public const string CommandZip = "cmd: -zip";
 
@@ -76,7 +76,7 @@ namespace Survey.Controllers.Commands
         public static Dictionary<string, string> CommandsListDict = new Dictionary<string, string>()
         {
             {CommandNewProfile, "- Заполнить новую анкету"},
-            {CommandStatistic, "- Показать статистику всех заполненных анкет"},
+            {CommandStatistics, "- Показать статистику всех заполненных анкет"},
             {CommandSave, "- Сохранить заполненную анкету"},
             {CommandProfileGoToQuestion, "<Номер вопроса> - Вернуться к указанному вопросу (Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)"},
             {CommandProfileGoToPrevioseQuestion, "- Вернуться к предыдущему вопросу (Команда доступна только при заполнении анкеты, вводится вместо ответа на любой вопрос)"},

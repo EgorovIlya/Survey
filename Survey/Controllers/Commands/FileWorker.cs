@@ -41,7 +41,7 @@ namespace Survey.Controllers.Commands
         #region Public Properties
 
         /// <summary>
-        ///     Represents a method for writting results and reads user input.
+        ///     Represents a method for writing results and reading user input.
         /// </summary>
         [Dependency]
         public IWriterAndReader WriterAndReaderWorker { get; set; }
@@ -49,10 +49,15 @@ namespace Survey.Controllers.Commands
         /// <summary>
         ///     Represents a command from commandList.
         /// </summary>
-        public string CommandName { get; set; } 
+        public string CommandName { get; set; }
 
         /// <summary>
-        ///     Represnts a path to the result directory. 
+        ///     Represents a user input.
+        /// </summary>
+        public string UserInput => m_UserInput;
+
+        /// <summary>
+        ///     Represents a path to the result directory. 
         /// </summary>
         public string PathToResults { get; set; } = SurveyConst.DirectoryName;
 
@@ -61,7 +66,7 @@ namespace Survey.Controllers.Commands
         #region Public Methods
 
         /// <summary>
-        ///     Finds saved profiles, shows depending on the entered command
+        ///      The ICommmand implementation. Finds saved profiles, shows result depending on the entered command.
         /// </summary>
         public void Execute()
         {
@@ -86,6 +91,7 @@ namespace Survey.Controllers.Commands
 
                 if (m_UserInput==CommandsList.CommandList)
                     GetAllSavedProfile();
+
                 else if (m_UserInput==CommandsList.CommandListToday)
                     GetTodaySavedProfile();
             }
@@ -106,13 +112,13 @@ namespace Survey.Controllers.Commands
         private bool FileTxtExists(string fullPath)
         {
            var result = File.Exists(fullPath);
-            if (!result)
+           if (!result)
                 throw new SurveyException(ErrorMessages.FileNotExists);
-            return result;
+           return result;
         }
 
         /// <summary>
-        ///     Reads lines form file, and shows them in the console.
+        ///     Reads lines form a file, and shows them in the console.
         /// </summary>
         /// <param name="fullPath">path to the profile</param>
         private void VeiwProfile(string fullPath)
@@ -128,7 +134,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Checks if directory exists.
+        ///     Checks if the directory exists.
         /// </summary>
         /// <returns></returns>
         private bool CheckDir()
@@ -140,7 +146,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Gets list of files in the result directory.
+        ///     Gets the list of files in the result directory.
         /// </summary>
         private void GetAllSavedProfile()
         {
@@ -151,7 +157,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Gets profiles, that was saved today.
+        ///     Gets the profiles, that was saved today.
         /// </summary>
         private void GetTodaySavedProfile()
         {
@@ -182,7 +188,7 @@ namespace Survey.Controllers.Commands
         private List<string> m_files;
 
         /// <summary>
-        ///     The user input.
+        ///    User input.
         /// </summary>
         private readonly string m_UserInput;
 

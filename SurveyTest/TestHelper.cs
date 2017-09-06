@@ -23,7 +23,7 @@ namespace SurveyTest
         }
 
         /// <summary>
-        ///     Checks if command "help" was inputted.  
+        ///     Checks the actions when the "Save" command is entered.
         /// </summary>
         [Test]
         public void TestSetCommandHelpReturnHelper()

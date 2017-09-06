@@ -8,6 +8,11 @@ namespace Survey.ModelsDTO
     {
         #region Constructors
 
+        /// <summary>
+        ///      Initializes a new instance of the Profile using the specified list of the ProfileItems and id.
+        /// </summary>
+        /// <param name="items">the specified list of the ProfileItems</param>
+        /// <param name="id">id</param>
         protected Profile(List<ProfileItem> items, string id)
         {
             ProfileId = id;

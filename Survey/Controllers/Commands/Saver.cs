@@ -7,6 +7,9 @@ using Survey.Utils;
 
 namespace Survey.Controllers.Commands
 {
+    /// <summary>
+    ///     Represents a class that can saves the profile.
+    /// </summary>
     public class Saver:ICommand
     {
         #region Constructors
@@ -24,18 +27,18 @@ namespace Survey.Controllers.Commands
         #region Public Properties
 
         /// <summary>
-        ///     Represents a profile, that must be saved.
+        ///     Represents the profile that needs to be saved.
         /// </summary>
         [Dependency]
         public IProfile WorkingProfile { get; set; }
 
         /// <summary>
-        ///     Represents a command from commandList.
+        ///     Represents a command from command list.
         /// </summary>
         public string CommandName { get; set; }
 
         /// <summary>
-        ///     Represnts a path to the result directory. 
+        ///     Represents a path to the result directory. 
         /// </summary>
         public string PathToResults { get; set; } = SurveyConst.DirectoryName;
 
@@ -45,7 +48,7 @@ namespace Survey.Controllers.Commands
 
 
         /// <summary>
-        ///     ICommand implementation. Saves the specified profile.
+        ///     The ICommand implementation. Saves the specified profile.
         /// </summary>
         public void Execute()
         {
@@ -57,6 +60,9 @@ namespace Survey.Controllers.Commands
 
         #region Private Methods
 
+        /// <summary>
+        ///     Saves the specified profile.
+        /// </summary>
         private void Save()
         {
             if (!Directory.Exists(PathToResults))
@@ -81,6 +87,9 @@ namespace Survey.Controllers.Commands
             }
         }
 
+        /// <summary>
+        ///     Checks the specified profile.
+        /// </summary>
         private void CheckProfile()
         {
             if (WorkingProfile.Items.Any(n => n.Answer == ""))

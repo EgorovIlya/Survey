@@ -5,8 +5,8 @@ namespace Survey.Controllers.Commands
 {
     public class Helper : ICommand
     {
-
         #region Constructors
+
         /// <summary>
         ///      Initializes a new instance of the Saver.
         /// </summary>
@@ -25,7 +25,7 @@ namespace Survey.Controllers.Commands
         public string CommandName { get; }
 
         /// <summary>
-        ///   Represents a method for writting results and reads user input.
+        ///   Represents a method for writing results and reads user input.
         /// </summary>
         [Dependency]
         public IWriterAndReader WriterAndReaderWorker { get; set; }
@@ -35,7 +35,7 @@ namespace Survey.Controllers.Commands
         #region Public Methods
 
         /// <summary>
-        ///     ICommand implementation.
+        ///     ICommand implementation. Displays help.
         /// </summary>
         public void Execute()
         {
@@ -46,7 +46,7 @@ namespace Survey.Controllers.Commands
         #region Private Methods
 
         /// <summary>
-        ///     Shows list of the commands.
+        ///     Displays list of the commands.
         /// </summary>
         private void ShowHelp()
         {

@@ -15,12 +15,12 @@
 
         #region Public Properties
         /// <summary>
-        ///     Question name.
+        ///     Represents the name of the question.
         /// </summary>
         public string QuestionName { get; set; }
 
         /// <summary>
-        ///     Question text.
+        ///     Represents the text of the question.
         /// </summary>
         public string QuestionText { get; set; }
 
@@ -28,10 +28,10 @@
 
         #region Public Methods
         /// <summary>
-        ///     Checks answer for correctness.
+        ///     Checks the answer for correctness.
         /// </summary>
-        /// <param name="answer"> answer</param>
-        /// <returns></returns>
+        /// <param name="answer">the answer</param>
+        /// <returns>the checked answer</returns>
         public abstract string CheckedAnswer(string answer);
         
         #endregion Public Methods

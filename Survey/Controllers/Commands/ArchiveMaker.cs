@@ -30,12 +30,17 @@ namespace Survey.Controllers.Commands
         #region Public Properties
 
         /// <summary>
-        ///     Represents the userInput name.
+        ///     Represents a command name.
         /// </summary>
         public string CommandName { get; }
 
         /// <summary>
-        ///     Represents the path to the result directory.
+        ///     Represents user input.
+        /// </summary>
+        public string UserInput => m_UserInput;
+
+        /// <summary>
+        ///     Represents a path to the result directory.
         /// </summary>
         public string PathToResults { get; set; } = SurveyConst.DirectoryName;
 
@@ -44,7 +49,7 @@ namespace Survey.Controllers.Commands
         #region Public Methods
 
         /// <summary>
-        ///     ICommmand implementation. Crerates archive from specified profile.
+        ///    The ICommmand implementation. Creates archive from the specified profile.
         /// </summary>
         public void Execute()
         {
@@ -89,7 +94,7 @@ namespace Survey.Controllers.Commands
         #region Private Methods
 
         /// <summary>
-        ///      Checks whether the directory exists.
+        ///      Checks if the directory exists.
         /// </summary>
         /// <param name="path"></param>
         private void CheckDir(string path)
@@ -99,7 +104,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Checks whether the file exists.
+        ///     Checks if the file exists.
         /// </summary>
         /// <param name="fullPath"></param>
         private void FileTxtExists(string fullPath)
@@ -111,7 +116,7 @@ namespace Survey.Controllers.Commands
         #endregion Private Methods
 
         /// <summary>
-        ///     Users userInput.
+        ///     Users input.
         /// </summary>
         private string m_UserInput;
     }

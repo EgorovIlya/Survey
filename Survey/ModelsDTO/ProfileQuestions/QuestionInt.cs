@@ -8,10 +8,16 @@ namespace Survey.ModelsDTO.ProfileQuestions
 
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the QuestionInt using the specified name and question.
+        /// </summary>
         public QuestionInt(string name, string question) : base(name, question)
         {
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the QuestionInt using the specified name , the question, the min value and the max value.
+        /// </summary>
         public QuestionInt(string name, string question, int min, int max) : base(name, question)
         {
             MaxValue = max;
@@ -22,15 +28,22 @@ namespace Survey.ModelsDTO.ProfileQuestions
 
         #region Public Properties
 
+        /// <summary>
+        ///     Represents the max value. 
+        /// </summary>
         public int MaxValue { get; set; } = int.MaxValue;
 
+        /// <summary>
+        ///     Represents the min value.
+        /// </summary>
         public int MinValue { get; set; } = int.MinValue;
 
         #endregion Public Properties
 
         #region Public Methods
+
         /// <summary>
-        ///     Checks answer for correctness.
+        ///     Checks the answer for correctness.
         /// </summary>
         /// <param name="answer"> answer</param>
         /// <returns>correct answer</returns>

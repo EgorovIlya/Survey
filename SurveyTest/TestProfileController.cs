@@ -88,7 +88,7 @@ namespace QuestionnaireSurveyTest
         }
 
         /// <summary>
-        ///     Checks output messages, if all answers is correct.
+        ///     Checks the output messages, if all answers is correct.
         /// </summary>
         [Test]
         public void TestAllCorrectAnswerForAllQuestion()
@@ -108,7 +108,7 @@ namespace QuestionnaireSurveyTest
         }
 
         /// <summary>
-        ///     Checks output messages, if first question was specified and inputted command "go to previous".
+        ///     Checks the output messages, if first question is specified and inputted command "go to previous".
         /// </summary>
         [Test]
         public void TestTryGoToPrevioseWhenFirstQuestionReturnErrorText()
@@ -134,7 +134,7 @@ namespace QuestionnaireSurveyTest
 
 
         /// <summary>
-        ///     Checks output messages, if fourth question was specified and inputted command "go to first".
+        ///     Checks the output messages, if fourth question is specified and inputted command "go to first".
         /// </summary>
         [Test]
         public void TestTryGoTo1From4Return1QuestionTextAnd4FourthQuestion()
@@ -160,7 +160,7 @@ namespace QuestionnaireSurveyTest
         }
 
         /// <summary>
-        ///     Checks output messages, if fourth question was specified and inputted command "go to previous".
+        ///     Checks the output messages, if fourth question is specified and inputted command "go to previous".
         /// </summary>
         [Test]
         public void TestTryGoToPrevioseFrom4Return3QuestionText()
@@ -186,7 +186,7 @@ namespace QuestionnaireSurveyTest
         }
 
         /// <summary>
-        ///     Checks output messages, if fourth question was specified and inputted command "restart".
+        ///     Checks the output messages, if fourth question is specified and inputted command "restart".
         /// </summary>
         [Test]
         public void TestCommandClearWhen4QuestionReturnProfileRestart()
@@ -215,9 +215,8 @@ namespace QuestionnaireSurveyTest
             CollectionAssert.AreEqual(m_ExpectedMessage, m_OutputMessages);
         }
 
-
         /// <summary>
-        ///     Checks output messages, if fourth question was specified and inputted answer was not corrected.
+        ///     Checks the output messages, if fourth question is specified and inputted answer is not correct.
         /// </summary>
         [Test]
         public void TestInputIncorrectAnswerOn4QuestionReturnErrorAnd4QuestionAgain()

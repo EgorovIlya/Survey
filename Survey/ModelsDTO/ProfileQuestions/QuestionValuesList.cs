@@ -8,6 +8,9 @@ namespace Survey.ModelsDTO.ProfileQuestions
     {
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the QuestionString using the specified name and question.
+        /// </summary>
         public QuestionValuesList(string name, string question, List<string> values) : base(name, question)
         {
             ChekingValues = values;
@@ -17,6 +20,9 @@ namespace Survey.ModelsDTO.ProfileQuestions
 
         #region Public Properties
 
+        /// <summary>
+        ///     Represents the list of the possible values.
+        /// </summary>
         public List<string> ChekingValues { get; set; }
 
         #endregion Public Properties
@@ -24,10 +30,10 @@ namespace Survey.ModelsDTO.ProfileQuestions
         #region Public Methods
 
         /// <summary>
-        ///     Checks answer for correctness.
+        ///     Checks the answer for correctness.
         /// </summary>
-        /// <param name="answer"> answer</param>
-        /// <returns>correct answer</returns>
+        /// <param name="answer"> the answer</param>
+        /// <returns>the correct answer</returns>
         public override string CheckedAnswer(string answer)
         {
             string answerText = "";

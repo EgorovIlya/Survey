@@ -335,6 +335,11 @@ namespace SurveyTest
                 .And.Message.EqualTo(ErrorMessages.CommandNotCorrect));
         }
 
+        /// <summary>
+        ///     Returns a new instance of the FileWorker.
+        /// </summary>
+        /// <param name="input">the user input</param>
+        /// <param name="command">the command</param>
         private void GetFileWorker(string input, string command)
         {
             var fwICommand = m_container.Resolve<ICommand>(command

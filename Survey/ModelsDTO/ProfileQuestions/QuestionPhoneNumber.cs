@@ -7,6 +7,9 @@ namespace Survey.ModelsDTO.ProfileQuestions
     {
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the QuestionPhoneNumber using the specified name and question.
+        /// </summary>
         public QuestionPhoneNumber(string name, string question) : base(name, question) {}
 
         #endregion Constructors
@@ -14,10 +17,10 @@ namespace Survey.ModelsDTO.ProfileQuestions
         #region Public Methods
 
         /// <summary>
-        ///     Checks answer for correctness.
+        ///     Checks the answer for correctness.
         /// </summary>
-        /// <param name="answer"> answer</param>
-        /// <returns>correct answer</returns>
+        /// <param name="answer"> the answer</param>
+        /// <returns>the correct answer</returns>
         public override string CheckedAnswer(string answer)
         {
           Regex phonePattern = new Regex(@"^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$");
