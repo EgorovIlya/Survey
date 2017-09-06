@@ -42,6 +42,12 @@ namespace Survey.Controllers.Commands
         /// </summary>
         private void ReadProfiles()
         {
+            if (!Directory.Exists(SurveyConst.DirectoryName))
+                throw new SurveyException(ErrorMessages.DirectoryNotExists);
+
+            if (!Directory.GetFiles(SurveyConst.DirectoryName).Any())
+                throw new SurveyException($"{ErrorMessages.SavedProfilesNotFound} {Path.GetFullPath(SurveyConst.DirectoryName)}");
+
             var files = Directory.GetFiles(SurveyConst.DirectoryName);
 
             foreach (var file in files)
@@ -134,10 +140,7 @@ namespace Survey.Controllers.Commands
             sb.Append(SurveyConst.OutputMessageMaxExpPerson);
             sb.Append(" ");
 
-            if (string.IsNullOrEmpty(m_FIOmaxExp))
-                sb.Append(ErrorMessages.DataNotFound);
-            else
-                sb.Append(m_FIOmaxExp);
+            sb.Append(string.IsNullOrEmpty(m_FIOmaxExp) ? ErrorMessages.DataNotFound : m_FIOmaxExp);
 
             WriterAndReaderWorker.WriteLine(sb.ToString());
         }

@@ -21,16 +21,23 @@ namespace Survey.Controllers.Commands
         {
             CommandName = CommandsList.CommandSave;
         }
-
+        
         #endregion Constructors
 
         #region Public Properties
 
         /// <summary>
-        ///     Represents the profile that needs to be saved.
+        ///     Represents a method for writing results and reading user input.
         /// </summary>
         [Dependency]
-        public IProfile WorkingProfile { get; set; }
+        public IWriterAndReader WriterAndReaderWorker { get; set; }
+
+        /// <summary>
+        ///     Represents the profile that needs to be saved.
+        /// </summary>
+        //public IProfile WorkingProfile { get { return m_WorkingProfile; } set { m_WorkingProfile = value; }}
+        [Dependency]
+        public IProfile WorkingProfile { get; set;}
 
         /// <summary>
         ///     Represents a command from command list.
@@ -85,6 +92,8 @@ namespace Survey.Controllers.Commands
                     writer.WriteLine(s, Environment.NewLine);
                 }
             }
+
+            WriterAndReaderWorker.WriteLine($"{SurveyConst.FileWasSavedByPath} {Path.GetFullPath(path)}");
         }
 
         /// <summary>

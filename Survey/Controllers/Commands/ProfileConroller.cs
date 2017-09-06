@@ -118,6 +118,7 @@ namespace Survey.Controllers.Commands
         {
             try
             {
+
                 m_CurrProfileItem.Answer = m_CurrProfileItem.Question.CheckedAnswer(userInput);
 
                 if (WorkingProfile.Items.Any(n => n.Answer == ""))

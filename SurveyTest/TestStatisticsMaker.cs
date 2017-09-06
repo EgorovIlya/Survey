@@ -178,6 +178,45 @@ namespace SurveyTest
         }
 
         /// <summary>
+        ///     Checks that the exception will thrown when the directory with results not exists.  
+        /// </summary>
+        [Test]
+        public void TestTryGetStatisticsIfDirectoryNotExists()
+        {
+            //Arrange
+
+            //Act
+            CleanUp();
+
+            //Assert
+            Assert.That(() => { m_StatisticMaker.Execute(); ; }, Throws
+                .TypeOf<SurveyException>()
+                .And.Message.EqualTo(ErrorMessages.DirectoryNotExists));
+        }
+
+        /// <summary>
+        ///     Checks that the exception will thrown when the directory with results is empty.  
+        /// </summary>
+        [Test]
+        public void TestTryingSavePartiallyCompletedReturnException()
+        {
+            //Arrange
+
+            //Act
+            CleanUp();
+            if (!Directory.Exists(SurveyConst.DirectoryName))
+            {
+                Directory.CreateDirectory(SurveyConst.DirectoryName);
+            }
+
+            //Assert
+            Assert.That(() => { m_StatisticMaker.Execute(); ; }, Throws
+                .TypeOf<SurveyException>()
+                .And.Message.Contain(ErrorMessages.SavedProfilesNotFound));
+        }
+
+
+        /// <summary>
         ///     Creates and saves profiles.
         /// </summary>
         /// <param name="profile1">the first profile</param>

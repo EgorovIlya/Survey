@@ -51,14 +51,13 @@ namespace Survey.Controllers
 
             else if (userInput== CommandsList.CommandSave)
                 Command = m_Profile!=null 
-                    ? m_UnityContainer.Resolve<ICommand>(CommandsList.CommandSave,new ParameterOverride(SurveyConst.WorkingProfile, m_Profile)) 
+                    ? m_UnityContainer.Resolve<ICommand>(CommandsList.CommandSave, new PropertyOverride(SurveyConst.WorkingProfile, m_Profile)) 
                     : m_UnityContainer.Resolve<ICommand>(CommandsList.CommandSave);
             else if (userInput.Contains(CommandsList.CommandNewProfile))
             {
                 m_Profile = m_UnityContainer.Resolve<IProfile>();
-                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandNewProfile, new ParameterOverride(SurveyConst.WorkingProfile, m_Profile));
+                Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandNewProfile, new PropertyOverride(SurveyConst.WorkingProfile, m_Profile));
             }
-
             else if (userInput == CommandsList.CommandExit)
                 Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandExit);
 

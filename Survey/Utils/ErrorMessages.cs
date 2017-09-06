@@ -46,6 +46,7 @@
         public const string ArchieveDirectoryNotExists = "Указан несуществующий путь к директории с архивом.";
 
         //StatisticsMaker
+        public const string SavedProfilesNotFound = "Не найдено сохраненных анкет по пути ";
         public const string DataNotFound = "Нет данных!";
 
         //Tools

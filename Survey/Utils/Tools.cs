@@ -8,7 +8,7 @@
         ///     Returns the text corresponding to the number of years
         /// </summary>
         /// <param name="years">the number of years</param>
-        /// <returns></returns>
+        /// <returns>the text</returns>
         public static string GetYears(int years)
         {
             if ((years - 11) % 100 == 0)
@@ -43,7 +43,7 @@
         /// </summary>
         /// <param name="text">user input</param>
         /// <param name="command">command</param>
-        /// <returns></returns>
+        /// <returns>the user input without command</returns>
         public static string GetTextWithoutCommand(string text, string command)
         {
             string result = "";

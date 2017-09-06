@@ -13,7 +13,10 @@
         public const string OutputMessageAverageAge = "Средний возраст всех опрошенных:";
         public const string OutputMessageProgrammingLang = "Самый популярный язык программирования:";
 
-        //Constr parametrs name
+        //Saver
+        public const string FileWasSavedByPath = "Файл анкеты был  сохранен по следующему пути ";
+
+        //Constr parameters name
 
         /// <summary>
         ///     Name of property. Writer and reader.
@@ -27,12 +30,12 @@
         public const string WorkingProfile = "WorkingProfile";
 
         /// <summary>
-        ///     Constructor parametr name. The name of the command (from CommandDict).
+        ///     Constructor parameter name. The name of the command (from CommandDict).
         /// </summary>
         public const string CommandName = "commandName";
 
         /// <summary>
-        ///      Constructor parametr name. User input.
+        ///      Constructor parameter name. User input.
         /// </summary>
         public const string UserInput = "userInput";
     }
