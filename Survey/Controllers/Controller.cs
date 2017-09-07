@@ -64,10 +64,10 @@ namespace Survey.Controllers
             else if (userInput == CommandsList.CommandStatistics)
                 Command = m_UnityContainer.Resolve<ICommand>(CommandsList.CommandStatistics);
 
-            else if (userInput.Contains(CommandsList.CommandFind))
+            else if (userInput.StartsWith(CommandsList.CommandFind))
                 Command = Resolve(CommandsList.CommandFind,userInput);
 
-            else if (userInput.Contains(CommandsList.CommandDelete))
+            else if (userInput.StartsWith(CommandsList.CommandDelete))
                 Command = Resolve(CommandsList.CommandDelete, userInput);
            
             else if (userInput == CommandsList.CommandList)
@@ -76,7 +76,7 @@ namespace Survey.Controllers
             else if (userInput == CommandsList.CommandListToday)
                 Command = Resolve(CommandsList.CommandListToday, userInput);
 
-            else if (userInput.Contains(CommandsList.CommandZip))
+            else if (userInput.StartsWith(CommandsList.CommandZip))
                 Command = Resolve(CommandsList.CommandZip, userInput);
             else
                 Command = m_UnityContainer.Resolve<ICommand>();

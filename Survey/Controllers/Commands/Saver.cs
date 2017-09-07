@@ -35,7 +35,6 @@ namespace Survey.Controllers.Commands
         /// <summary>
         ///     Represents the profile that needs to be saved.
         /// </summary>
-        //public IProfile WorkingProfile { get { return m_WorkingProfile; } set { m_WorkingProfile = value; }}
         [Dependency]
         public IProfile WorkingProfile { get; set;}
 
@@ -52,7 +51,6 @@ namespace Survey.Controllers.Commands
         #endregion Public Properties
 
         #region Public Methods
-
 
         /// <summary>
         ///     The ICommand implementation. Saves the specified profile.
@@ -81,8 +79,9 @@ namespace Survey.Controllers.Commands
 
             for (int i=0; i<WorkingProfile.Items.Count();i++)
             {
-                answer[i] = $"{i + 1}. {WorkingProfile.Items[i].Question.QuestionName}: {WorkingProfile.Items[i].Answer}";
+                answer[i] = $"{i + 1}. {WorkingProfile.Items[i].Question.QuestionName}{SurveyConst.Separator}{WorkingProfile.Items[i].Answer}";
             }
+
             string path = Path.Combine(PathToResults, $"{WorkingProfile.ProfileId}.txt");
 
             using (var writer = new StreamWriter(path))
@@ -91,6 +90,8 @@ namespace Survey.Controllers.Commands
                 {
                     writer.WriteLine(s, Environment.NewLine);
                 }
+
+                writer.WriteLine($"{SurveyConst.ProfileWasCreated}{SurveyConst.Separator}{DateTime.Now.ToString(SurveyConst.FormatDate)}", Environment.NewLine);
             }
 
             WriterAndReaderWorker.WriteLine($"{SurveyConst.FileWasSavedByPath} {Path.GetFullPath(path)}");

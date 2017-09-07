@@ -9,14 +9,21 @@
         public const string SaveProfile = "Анкета заполнена, но не сохранена! Для сохранения введите команду ";
 
         //StatisticsMaker
-        public const string OutputMessageMaxExpPerson = "Самый опытный программист:";
-        public const string OutputMessageAverageAge = "Средний возраст всех опрошенных:";
-        public const string OutputMessageProgrammingLang = "Самый популярный язык программирования:";
+        public const string OutputMessageMaxExpPerson = "Самый опытный программист";
+        public const string OutputMessageAverageAge = "Средний возраст всех опрошенных";
+        public const string OutputMessageProgrammingLang = "Самый популярный язык программирования";
 
         //Saver
         public const string FileWasSavedByPath = "Файл анкеты был  сохранен по следующему пути ";
 
-        //Constr parameters name
+        /// <summary>
+        ///     Text for date of creation. 
+        /// </summary>
+        public const string ProfileWasCreated = "Анкета заполнена";
+
+        public const string Separator = ": ";
+
+        //Constr parameters and properties name
 
         /// <summary>
         ///     Name of property. Writer and reader.

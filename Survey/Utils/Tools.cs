@@ -1,4 +1,6 @@
-﻿namespace Survey.Utils
+﻿using System;
+
+namespace Survey.Utils
 {
 
    public static class Tools
@@ -60,6 +62,24 @@
             }
 
             return result;
+        }
+
+        /// <summary>
+        ///     Gets the clear user answer form the specified string.
+        /// </summary>
+        /// <param name="answer">the saved answer</param>
+        /// <param name="separator">the separator</param>
+        /// <returns>the answer without technical text</returns>
+        public static string GetAnswerFormSavedProfile(string answer, string separator)
+        {
+            int lenght = answer.Length;
+            int indexSeparator = answer.IndexOf(separator, StringComparison.Ordinal) + 2;
+            int delta = lenght - indexSeparator;
+
+            if (indexSeparator > lenght)
+                return "";
+
+            return answer.Substring(indexSeparator, delta);
         }
     }
 }

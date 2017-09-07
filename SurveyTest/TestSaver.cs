@@ -134,7 +134,13 @@ namespace SurveyTest
                 , new PropertyOverride("WorkingProfile", m_profileFullyCompletedMock.Object));
 
             bool expected = true;
-            List<string> expectedTxt = new List<string> { "1. ФИО: Айзек Азимов", "2. Дата рождения: 22.11.1989" };
+            List<string> expectedTxt = new List<string>
+            {
+                  "1. ФИО: Айзек Азимов"
+                , "2. Дата рождения: 22.11.1989"
+                , $"{SurveyConst.ProfileWasCreated}{SurveyConst.Separator}{DateTime.Now.ToString(SurveyConst.FormatDate)}"
+            };
+
             List<string> actualTxt = new List<string>();
 
             //Act

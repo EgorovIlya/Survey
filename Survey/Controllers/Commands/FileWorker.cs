@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using Microsoft.Practices.Unity;
@@ -163,10 +164,27 @@ namespace Survey.Controllers.Commands
         {
             foreach (var file in m_files)
             {
-                DateTime dateCreation = File.GetCreationTime(file);
-                if (dateCreation >= DateTime.Today 
-                    && dateCreation < DateTime.Today.AddDays(1))
-                    WriterAndReaderWorker.WriteLine(Path.GetFileNameWithoutExtension(file));
+                string srline;
+                DateTime dateCreation;
+
+                using (StreamReader r = new StreamReader(file, true))
+                {
+                    while ((srline = r.ReadLine()) != null)
+                    {
+                        if (srline.Contains(SurveyConst.ProfileWasCreated))
+                        {
+                            string dateCreationString = Tools.GetAnswerFormSavedProfile(srline, SurveyConst.Separator);
+
+                            if (DateTime.TryParseExact(dateCreationString, SurveyConst.FormatDate,
+                                CultureInfo.CurrentCulture, DateTimeStyles.None, out dateCreation))
+                            {
+                                if (dateCreation >= DateTime.Today
+                                    && dateCreation < DateTime.Today.AddDays(1))
+                                    WriterAndReaderWorker.WriteLine(Path.GetFileNameWithoutExtension(file));
+                            }
+                        }
+                    }
+                }
             }
         }
 

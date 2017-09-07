@@ -220,6 +220,7 @@ namespace SurveyTest
             //Act
             GetFileWorker(commandText, CommandsList.CommandFind);
             m_ExpectedMessage.Add("1. ФИО: Рэй Бредбери");
+            m_ExpectedMessage.Add($"{SurveyConst.ProfileWasCreated}{SurveyConst.Separator}{DateTime.Now.ToString(SurveyConst.FormatDate)}");
             //Assert
             Assert.IsTrue(File.Exists(pathToProfile1Mock), "Файл для тестирования поиска не создан!");
 
@@ -284,24 +285,50 @@ namespace SurveyTest
         ///    Checks that only today saved profiles are shown.  
         /// </summary>
         [Test]
-        public void TestCommandListReturnListTodayOfTwoFiles()
+        public void TestCommandListTodaReturnTwoFiles()
         {
             //Arrange
             string commandText = CommandsList.CommandListToday; //$"{CommandsList.CommandList} {m_profile1Mock.Object.ProfileId}";
 
             //Act
             GetFileWorker(commandText, CommandsList.CommandListToday);
+
+            Assert.IsTrue(File.Exists(pathToProfile1Mock), "Файл для тестирования поиска не создан!");
+
+            List<string> profileStrings = new List<string>();
+
+            using (StreamReader r = new StreamReader(pathToProfile1Mock, true))
+            {
+                string srline;
+                while ((srline = r.ReadLine()) != null)
+                {
+                    profileStrings.Add(srline);
+                }
+            }
+
+            int indexDateCreate = profileStrings.FindIndex(0, n => n.StartsWith(SurveyConst.ProfileWasCreated));
+
+            Assert.AreNotEqual(-1, indexDateCreate, "В сохраненном файле анекты нет даты создания!!!");
+
+            profileStrings[indexDateCreate] = $"{SurveyConst.ProfileWasCreated}{SurveyConst.Separator}{DateTime.Now.AddDays(-2).ToString(SurveyConst.FormatDate)}" ;
            
+            using (var writer = new StreamWriter(pathToProfile1Mock))
+            {
+                foreach (var s in profileStrings)
+                {
+                    writer.WriteLine(s, Environment.NewLine);
+                }
+           }
+
             m_ExpectedMessage.Add("123-123-123456-2");
             m_ExpectedMessage.Add("123-123-123456-3");
 
 
             //Assert
-            Assert.IsTrue(File.Exists(pathToProfile1Mock), "Файл для тестирования поиска не создан!");
+          
             Assert.IsTrue(File.Exists(pathToProfile2Mock), "Файл для тестирования поиска не создан!");
             Assert.IsTrue(File.Exists(pathToProfile3Mock), "Файл для тестирования поиска не создан!");
 
-            File.SetCreationTime(pathToProfile1Mock, new DateTime(2017, 08, 28));
 
             m_FileWorker.Execute();
 

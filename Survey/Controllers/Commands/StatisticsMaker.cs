@@ -52,15 +52,15 @@ namespace Survey.Controllers.Commands
 
             foreach (var file in files)
             {
-                string FIO = "";
-                string srline;
+                string fio = "";
                 using (StreamReader r = new StreamReader(file, true))
                 {
+                    string srline;
                     while ((srline =r.ReadLine()) != null)
                     {
                         if (srline.Contains(m_FIO))
                         {
-                            FIO = GetAnswerFormSavedProfile(srline);
+                            fio = GetAnswerFormSavedProfile(srline);
                         }
 
                         if (srline.Contains(m_BirthDay))
@@ -78,18 +78,28 @@ namespace Survey.Controllers.Commands
                         if (srline.Contains(m_Years))
                         {
                             string exp = GetAnswerFormSavedProfile(srline);
-                            int expInt;
-
-                            if (!string.IsNullOrEmpty(FIO) && int.TryParse(exp, out expInt))
-                            {
-                                if (expInt > m_MaxExp )
-                                {
-                                    m_MaxExp = expInt;
-                                    m_FIOmaxExp = FIO;
-                                }
-                            }
+                            SetMaxExp(exp, fio);
                         }
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Sets the years of max experience and the name of the programmer.
+        /// </summary>
+        /// <param name="exp">the string with experience</param>
+        /// <param name="fio">the name</param>
+        private void SetMaxExp(string exp, string fio)
+        {
+            int expInt;
+
+            if (!string.IsNullOrEmpty(fio) && int.TryParse(exp, out expInt))
+            {
+                if (expInt > m_MaxExp)
+                {
+                    m_MaxExp = expInt;
+                    m_FIOmaxExp = fio;
                 }
             }
         }
@@ -99,52 +109,74 @@ namespace Survey.Controllers.Commands
         /// </summary>
         private void ShowStat()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(SurveyConst.OutputMessageAverageAge);
-            sb.Append(" ");
+            string[] vales = new[]
+            {
+                 SurveyConst.OutputMessageAverageAge
+                ,SurveyConst.OutputMessageProgrammingLang
+                ,SurveyConst.OutputMessageMaxExpPerson
+            };
 
+            foreach (var vale in vales)
+            {
+                WriteResult(vale);
+            }
+        }
+
+        /// <summary>
+        ///     Writes the results.
+        /// </summary>
+        /// <param name="value"></param>
+        private void WriteResult(string value)
+        {
+            if (value == SurveyConst.OutputMessageAverageAge)
+                WriteAge();
+            else if (value == SurveyConst.OutputMessageProgrammingLang)
+                WriteProgrammingLang();
+            else if (value == SurveyConst.OutputMessageMaxExpPerson)
+                WriteMaxExpPerson();
+        }
+
+        /// <summary>
+        ///     Writes the average age.
+        /// </summary>
+        private void WriteAge()
+        {
+            string value = ErrorMessages.DataNotFound;
             if (m_Ages.Any())
             {
-                var averageAge = (int) Math.Round(m_Ages.Average(n => n), 0);
-                sb.Append(averageAge);
-                sb.Append(" ");
-                sb.Append(Tools.GetYears(averageAge));
+                var averageAge = (int)Math.Round(m_Ages.Average(n => n), 0);
+                value =$"{averageAge} {Tools.GetYears(averageAge)}";
             }
-            else
-            {
-                 sb.Append(ErrorMessages.DataNotFound);
-            }
-
-            WriterAndReaderWorker.WriteLine(sb.ToString());
-            sb.Clear();
-            sb.Append(SurveyConst.OutputMessageProgrammingLang);
-            sb.Append(" ");
+            WriterAndReaderWorker.WriteLine($"{SurveyConst.OutputMessageAverageAge}{SurveyConst.Separator}{value}");
+        }
+        
+        /// <summary>
+        ///     Writes the most experienced programmer.
+        /// </summary>
+        private void WriteProgrammingLang()
+        {
+            string value = ErrorMessages.DataNotFound;
 
             if (m_Languages.Any())
             {
-                var lang = m_Languages.GroupBy(v => v)
-                    .Select(s => new {s, count = s.Count()})
+                value = m_Languages.GroupBy(v => v)
+                    .Select(s => new { s, count = s.Count() })
                     .OrderByDescending(n => n.count)
                     .First()
                     .s.Key;
-                sb.Append(lang);
             }
-            else
-            {
-                sb.Append(ErrorMessages.DataNotFound);
-            }
-
-            WriterAndReaderWorker.WriteLine(sb.ToString());
-            sb.Clear();
-
-            sb.Append(SurveyConst.OutputMessageMaxExpPerson);
-            sb.Append(" ");
-
-            sb.Append(string.IsNullOrEmpty(m_FIOmaxExp) ? ErrorMessages.DataNotFound : m_FIOmaxExp);
-
-            WriterAndReaderWorker.WriteLine(sb.ToString());
+            WriterAndReaderWorker.WriteLine($"{SurveyConst.OutputMessageProgrammingLang}{SurveyConst.Separator}{value}");
         }
-        
+
+        /// <summary>
+        ///     Writes the most popular language.
+        /// </summary>
+        private void WriteMaxExpPerson()
+        {
+            string value = string.IsNullOrEmpty(m_FIOmaxExp) ? ErrorMessages.DataNotFound : m_FIOmaxExp;
+            WriterAndReaderWorker.WriteLine($"{SurveyConst.OutputMessageMaxExpPerson}{SurveyConst.Separator}{value}");
+        }
+
         /// <summary>
         ///     Gets the age from the specified string.
         /// </summary>
@@ -175,14 +207,7 @@ namespace Survey.Controllers.Commands
         /// <returns></returns>
         private string GetAnswerFormSavedProfile(string answer)
         {
-            int lenght = answer.Length;
-            int indexSeparator = answer.IndexOf(m_Separator, StringComparison.Ordinal) + 2;
-            int delta = lenght - indexSeparator;
-
-            if (indexSeparator > lenght)
-                return "";
-
-            return answer.Substring(indexSeparator, delta);
+            return Tools.GetAnswerFormSavedProfile(answer, SurveyConst.Separator);
         }
 
         /// <summary>
@@ -225,9 +250,5 @@ namespace Survey.Controllers.Commands
         /// </summary>
         private string m_FIO = "ФИО";
 
-        /// <summary>
-        ///     The separator.
-        /// </summary>
-        private string m_Separator = ": ";
     }
 }

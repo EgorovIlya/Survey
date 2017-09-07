@@ -76,8 +76,10 @@ namespace Survey.Controllers.Commands
             if(m_ProfileComplete)
                 return;
 
+          q.Answer = "";
+
           WriterAndReaderWorker.WriteLine(q.Question.QuestionText);
-          System.Windows.Forms.SendKeys.SendWait(q.Answer);
+         
           string userInput = WriterAndReaderWorker.ReadLine();
           CheckInput(userInput);
         }
