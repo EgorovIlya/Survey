@@ -1,14 +1,23 @@
-﻿namespace Survey.ModelsDTO.ProfileQuestions
+﻿using System;
+
+namespace Survey.ModelsDTO.ProfileQuestions
 {
+    /// <summary>
+    ///     Represents the ProfileQuestion. Consists from question name, question text,  and method, that checks for correctness.
+    /// </summary>
     public abstract class ProfileQuestion
     {
 
         #region Constructors
-
+        /// <summary>
+        ///     Constructs a ProfileQuestion with a given name and question.
+        /// </summary>
+        /// <param name="name">specified name</param>
+        /// <param name="question">specified question</param>
         protected ProfileQuestion(string name,string question)
         {
-            QuestionName = name;
-            QuestionText = question;
+            QuestionName = name ?? throw new ArgumentNullException(nameof(name));
+            QuestionText = question ?? throw new ArgumentNullException(nameof(question)); ;
         }
 
         #endregion Constructors

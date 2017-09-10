@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
 using Survey.Interface;
 using Survey.Utils;
@@ -22,7 +23,7 @@ namespace Survey.Controllers.Commands
         public ArchiveMaker(string userInput)
         {
             CommandName = CommandsList.CommandZip;
-            m_UserInput = userInput;
+            m_UserInput = userInput ?? throw new ArgumentNullException(nameof(userInput)); 
         }
 
         #endregion Constructors

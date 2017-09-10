@@ -6,13 +6,16 @@ using Survey.Utils;
 
 namespace Survey.Controllers.Commands
 {
+    /// <summary>
+    ///     Implements a controller that uses the specified profile. 
+    /// Moves to the next , previous  or specified question, clears all the answers.
+    /// </summary>
     public class ProfileConroller:ICommand
     {
-
         #region Constructors
 
         /// <summary>
-        ///      Initializes a new instance of the Saver.
+        ///      Initializes a new instance of the ProfileConroller.
         /// </summary>
         public ProfileConroller()
         {
@@ -85,7 +88,7 @@ namespace Survey.Controllers.Commands
         }
 
         /// <summary>
-        ///     Checks user input. Find a command.
+        ///     Checks user input. Finds a command.
         /// </summary>
         /// <param name="userInput">User input</param>
         private void CheckInput(string userInput)
@@ -200,10 +203,10 @@ namespace Survey.Controllers.Commands
                 {
                     if (index < 1 || index > WorkingProfile.Items.Count)
                     {
-                        string Error =
+                        string error =
                             ErrorMessages.QuestionNumberMustBeBetweenMinAndMax.Replace("max",
                                 WorkingProfile.Items.Count.ToString());
-                        WriterAndReaderWorker.WriteLine(Error);
+                        WriterAndReaderWorker.WriteLine(error);
                     }
                 }
                 else
@@ -237,6 +240,7 @@ namespace Survey.Controllers.Commands
         #endregion Private Methods
 
         #region Private Properties
+
         /// <summary>
         ///    The index of the current profile item.
         /// </summary>

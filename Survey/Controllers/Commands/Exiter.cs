@@ -3,6 +3,9 @@ using Survey.Interface;
 
 namespace Survey.Controllers.Commands
 {
+    /// <summary>
+    ///         Represents a class that closes an application.
+    /// </summary>
     public class Exiter:ICommand
     {
         #region Constructors

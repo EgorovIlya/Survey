@@ -10,8 +10,15 @@ using Survey.Utils;
 
 namespace Survey.Controllers.Commands
 {
+    /// <summary>
+    ///     Represents a StatisticsMaker which shows the average age,the most popular programming language 
+    /// and the  most experienced programmer.
+    /// </summary>
     public class StatisticsMaker:ICommand
     {
+        /// <summary>
+        ///      Initializes a new instance of the StatisticsMaker.
+        /// </summary>
         public StatisticsMaker()
         {
             CommandName = CommandsList.CommandSave;

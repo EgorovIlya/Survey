@@ -9,14 +9,14 @@ namespace Survey.ModelsDTO.ProfileQuestions
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the QuestionDate using the specified name and the question.
+        ///     Constructs  a new instance of the QuestionDate using the specified name and the question.
         /// </summary>
         public QuestionDate(string name, string question) : base(name, question)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the QuestionDate using the specified name , the question, the min date and the max date.
+        ///     Constructs  a new instance of the QuestionDate using the specified name , the question, the min date and the max date.
         /// </summary>
         public QuestionDate(string name, string question, DateTime min, DateTime max ) : base(name, question)
         {

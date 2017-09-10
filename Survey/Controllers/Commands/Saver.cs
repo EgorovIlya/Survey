@@ -8,7 +8,7 @@ using Survey.Utils;
 namespace Survey.Controllers.Commands
 {
     /// <summary>
-    ///     Represents a class that can saves the profile.
+    ///     Represents a class which can save the profile.
     /// </summary>
     public class Saver:ICommand
     {

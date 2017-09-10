@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Survey.ModelsDTO;
 using Survey.Interface;
 
 namespace Survey.ModelsDTO
 {
-   public abstract class Profile:IProfile
+    /// <summary>
+    ///     Represents a class that uses a List of ProfileItems and has own ID.
+    /// </summary>
+    public abstract class Profile:IProfile
     {
         #region Constructors
 
@@ -15,8 +19,8 @@ namespace Survey.ModelsDTO
         /// <param name="id">id</param>
         protected Profile(List<ProfileItem> items, string id)
         {
-            ProfileId = id;
-            Items = items;
+            ProfileId = id ?? throw new ArgumentNullException(nameof(id));
+            Items = items ?? throw new ArgumentNullException(nameof(items)); ;
         }
 
         #endregion Constructors

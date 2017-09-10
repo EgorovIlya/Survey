@@ -10,7 +10,7 @@ using Survey.Utils;
 namespace Survey.Controllers.Commands
 {
     /// <summary>
-    ///     Represents a class that can works with saved profile.
+    ///     Represents a class which can works with saved profile.
     /// </summary>
     public class FileWorker:ICommand
     {

@@ -3,12 +3,15 @@ using Survey.Interface;
 
 namespace Survey.Controllers.Commands
 {
+    /// <summary>
+    ///     Represents a Helper that shows a list of commands with description.
+    /// </summary>
     public class Helper : ICommand
     {
         #region Constructors
 
         /// <summary>
-        ///      Initializes a new instance of the Saver.
+        ///      Initializes a new instance of the Helper.
         /// </summary>
         public Helper()
         {
