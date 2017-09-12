@@ -23,7 +23,7 @@ namespace Survey.Controllers.Commands
         public ArchiveMaker(string userInput)
         {
             CommandName = CommandsList.CommandZip;
-            m_UserInput = userInput ?? throw new ArgumentNullException(nameof(userInput)); 
+            m_UserInput = new UserInput(CommandsList.CommandZip, userInput); 
         }
 
         #endregion Constructors
@@ -38,7 +38,7 @@ namespace Survey.Controllers.Commands
         /// <summary>
         ///     Represents user input.
         /// </summary>
-        public string UserInput => m_UserInput;
+        public UserInput UserInput => m_UserInput;
 
         /// <summary>
         ///     Represents a path to the result directory.
@@ -56,7 +56,7 @@ namespace Survey.Controllers.Commands
         {
             CheckDir(PathToResults);
 
-            string profileAndPathToSave = Tools.GetTextWithoutCommand(m_UserInput, CommandsList.CommandZip);
+            string profileAndPathToSave = UserInput.TextWhitoutCommand;
 
             int idexOfprofileNameEnd = profileAndPathToSave.IndexOf(" ");
 
@@ -67,6 +67,7 @@ namespace Survey.Controllers.Commands
             string pathToArchive = profileAndPathToSave.Substring(idexOfprofileNameEnd+1, profileAndPathToSave.Length - idexOfprofileNameEnd - 1);
 
             string fullPath = Path.Combine(PathToResults, $"{profileName}.txt");
+
             FileTxtExists(fullPath);
 
             string directoryWithResult = Path.GetDirectoryName(pathToArchive);
@@ -119,6 +120,6 @@ namespace Survey.Controllers.Commands
         /// <summary>
         ///     Users input.
         /// </summary>
-        private string m_UserInput;
+        private UserInput m_UserInput;
     }
 }

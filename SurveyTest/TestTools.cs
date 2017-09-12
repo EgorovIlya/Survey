@@ -163,55 +163,55 @@ namespace SurveyTest
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
         }
 
-        /// <summary>
-        ///     Checks that returns a text without command, if the text is correct.
-        /// </summary>
-        [Test]
-        public void GetTextWithoutCommandIfTextIsCorrect()
-        {
-            //Arrange
-            string expected = "123456";
-            string text = $"{CommandsList.CommandFind} {expected}";
+        ///// <summary>
+        /////     Checks that returns a text without command, if the text is correct.
+        ///// </summary>
+        //[Test]
+        //public void GetTextWithoutCommandIfTextIsCorrect()
+        //{
+        //    //Arrange
+        //    string expected = "123456";
+        //    string text = $"{CommandsList.CommandFind} {expected}";
 
-            //Act
-            var actual = Tools.GetTextWithoutCommand(text, CommandsList.CommandFind);
+        //    //Act
+        //    var actual = Tools.GetTextWithoutCommand(text, CommandsList.CommandFind);
 
-            //Assert
-            Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
-        }
+        //    //Assert
+        //    Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
+        //}
 
-        /// <summary>
-        ///     Checks that returns a text without command, if the text is correct.
-        /// </summary>
-        [Test]
-        public void GetTextWithoutCommandIfTextIsNotCorrect()
-        {
-            //Arrange
-            string text = $"123456798 1321546545666";
+        ///// <summary>
+        /////     Checks that returns a text without command, if the text is correct.
+        ///// </summary>
+        //[Test]
+        //public void GetTextWithoutCommandIfTextIsNotCorrect()
+        //{
+        //    //Arrange
+        //    string text = $"123456798 1321546545666";
 
-            //Act
+        //    //Act
 
-            //Assert
-            Assert.That(() => { Tools.GetTextWithoutCommand(text, CommandsList.CommandFind); }, Throws
-                .TypeOf<SurveyException>()
-                .And.Message.EqualTo(ErrorMessages.InputTextWithOutCommand));
-        }
+        //    //Assert
+        //    Assert.That(() => { Tools.GetTextWithoutCommand(text, CommandsList.CommandFind); }, Throws
+        //        .TypeOf<SurveyException>()
+        //        .And.Message.EqualTo(ErrorMessages.InputTextWithOutCommand));
+        //}
 
-        /// <summary>
-        ///     Checks that returns a text without command, if the text is correct.
-        /// </summary>
-        [Test]
-        public void GetIfTextIsNotCorrectWithoutParams()
-        {
-            //Arrange
-            string text = $"{CommandsList.CommandFind}";
+        ///// <summary>
+        /////     Checks that returns a text without command, if the text is correct.
+        ///// </summary>
+        //[Test]
+        //public void GetIfTextIsNotCorrectWithoutParams()
+        //{
+        //    //Arrange
+        //    string text = $"{CommandsList.CommandFind}";
 
-            //Act
+        //    //Act
 
-            //Assert
-            Assert.That(() => { Tools.GetTextWithoutCommand(text, CommandsList.CommandFind); }, Throws
-                .TypeOf<SurveyException>()
-                .And.Message.EqualTo(ErrorMessages.CommandMustBeWithParametrs));
-        }
+        //    //Assert
+        //    Assert.That(() => { Tools.GetTextWithoutCommand(text, CommandsList.CommandFind); }, Throws
+        //        .TypeOf<SurveyException>()
+        //        .And.Message.EqualTo(ErrorMessages.CommandMustBeWithParametrs));
+        //}
     }
 }

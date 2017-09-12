@@ -96,7 +96,7 @@ namespace SurveyTest
             FileWorker fileWorker = controller.Command as FileWorker;
 
             Assert.AreNotEqual(null, fileWorker,"The instance is not correct");
-            Assert.AreEqual(userInput, fileWorker.UserInput, "User input is not correct");
+            Assert.AreEqual(userInput, fileWorker.UserInput.FullText, "User input is not correct");
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace SurveyTest
 
             //Assert
             Assert.AreNotEqual(null, fileWorker, "The instance is not correct");
-            Assert.AreEqual(command, fileWorker.UserInput, "User input is not correct");
+            Assert.AreEqual(command, fileWorker.UserInput.FullText, "User input is not correct");
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace SurveyTest
             FileWorker fileWorker = controller.Command as FileWorker;
 
             Assert.AreNotEqual(null, fileWorker, "The instance is not correct");
-            Assert.AreEqual(userInput, fileWorker.UserInput, "User input is not correct");
+            Assert.AreEqual(userInput, fileWorker.UserInput.FullText, "User input is not correct");
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace SurveyTest
             ArchiveMaker archiveMaker = controller.Command as ArchiveMaker;
 
             Assert.AreNotEqual(null, archiveMaker, "The instance is not correct");
-            Assert.AreEqual(userInput, archiveMaker.UserInput, "User input is not correct");
+            Assert.AreEqual(userInput, archiveMaker.UserInput.FullText, "User input is not correct");
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace SurveyTest
 
             //Assert
             Assert.AreNotEqual(null, fileWorker, "The instance is not correct");
-            Assert.AreEqual(command, fileWorker.UserInput, "User input is not correct");
+            Assert.AreEqual(command, fileWorker.UserInput.FullText, "User input is not correct");
         }
 
         /// <summary>

@@ -82,6 +82,7 @@
     <Compile Include="TestQuestionValueList.cs" />
     <Compile Include="TestQuestionInt.cs" />
     <Compile Include="TestQuestionString.cs" />
+    <Compile Include="TestSavedProfileReader.cs" />
     <Compile Include="TestSaver.cs" />
     <Compile Include="TestStatisticsMaker.cs" />
     <Compile Include="TestTools.cs" />

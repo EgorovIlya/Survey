@@ -285,10 +285,10 @@ namespace SurveyTest
         ///    Checks that only today saved profiles are shown.  
         /// </summary>
         [Test]
-        public void TestCommandListTodaReturnTwoFiles()
+        public void TestCommandListTodayReturnTwoFiles()
         {
             //Arrange
-            string commandText = CommandsList.CommandListToday; //$"{CommandsList.CommandList} {m_profile1Mock.Object.ProfileId}";
+            string commandText = CommandsList.CommandListToday; 
 
             //Act
             GetFileWorker(commandText, CommandsList.CommandListToday);
@@ -355,6 +355,7 @@ namespace SurveyTest
             Assert.IsTrue(File.Exists(pathToProfile1Mock), "Файл для тестирования поиска не создан!");
             Assert.IsTrue(File.Exists(pathToProfile2Mock), "Файл для тестирования поиска не создан!");
             Assert.IsTrue(File.Exists(pathToProfile3Mock), "Файл для тестирования поиска не создан!");
+
             File.SetCreationTime(pathToProfile1Mock, new DateTime(2017, 08, 28));
 
             Assert.That(() => { m_FileWorker.Execute(); }, Throws

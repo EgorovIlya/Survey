@@ -59,37 +59,35 @@ namespace Survey.Controllers.Commands
 
             foreach (var file in files)
             {
-                string fio = "";
-                using (StreamReader r = new StreamReader(file, true))
-                {
-                    string srline;
-                    while ((srline =r.ReadLine()) != null)
-                    {
-                        if (srline.Contains(m_FIO))
-                        {
-                            fio = GetAnswerFormSavedProfile(srline);
-                        }
+                SavedProfileReader savedProfile = new SavedProfileReader(file);
 
-                        if (srline.Contains(m_BirthDay))
-                        {
-                            Ages(srline, ref m_Ages);
-                        }
+                string fio = GetAnswer(savedProfile,m_FIO);
 
-                        if (srline.Contains(m_Language))
-                        {
-                            string lang = GetAnswerFormSavedProfile(srline);
-                            if(!string.IsNullOrEmpty(lang))
-                                m_Languages.Add(lang);
-                        }
+                string ageString = GetAnswer(savedProfile, m_BirthDay);
 
-                        if (srline.Contains(m_Years))
-                        {
-                            string exp = GetAnswerFormSavedProfile(srline);
-                            SetMaxExp(exp, fio);
-                        }
-                    }
-                }
+                if (!string.IsNullOrEmpty(ageString))
+                    Ages(ageString);
+
+                string langString = GetAnswer(savedProfile, m_Language);
+              
+                if (!string.IsNullOrEmpty(langString))
+                    m_Languages.Add(langString);
+
+                string expString = GetAnswer(savedProfile, m_Years);
+
+                if (!string.IsNullOrEmpty(expString))
+                    SetMaxExp(expString, fio);
             }
+        }
+
+        private string GetAnswer(SavedProfileReader savedProfile, string questionName)
+        {
+            string profileString = savedProfile.ProfileStrings.FirstOrDefault(n => n.Contains(questionName));
+
+            if (!string.IsNullOrEmpty(profileString))
+                return  savedProfile.GetAnswerFromSavedProfile(profileString, SurveyConst.Separator);
+
+            return "";
         }
 
         /// <summary>
@@ -189,14 +187,11 @@ namespace Survey.Controllers.Commands
         /// </summary>
         /// <param name="srline">the specified string</param>
         /// <param name="ages">list of ages</param>
-        private void Ages(string srline, ref List<int> ages)
+        private void Ages(string srline)
         {
-           
-            string birthday = GetAnswerFormSavedProfile(srline);
-
             DateTime dateBirthday;
 
-            if (!DateTime.TryParseExact(birthday, SurveyConst.FormatDate, CultureInfo.CurrentCulture, DateTimeStyles.None, out dateBirthday))
+            if (!DateTime.TryParseExact(srline, SurveyConst.FormatDate, CultureInfo.CurrentCulture, DateTimeStyles.None, out dateBirthday))
                 return;
 
             int year = DateTime.Now.Year - dateBirthday.Year;
@@ -204,17 +199,7 @@ namespace Survey.Controllers.Commands
             if (dateBirthday.AddYears(year) > DateTime.Now)
                 year--;
 
-            ages.Add(year);
-        }
-
-        /// <summary>
-        ///     Gets the clear user answer form the specified string.
-        /// </summary>
-        /// <param name="answer"></param>
-        /// <returns></returns>
-        private string GetAnswerFormSavedProfile(string answer)
-        {
-            return Tools.GetAnswerFormSavedProfile(answer, SurveyConst.Separator);
+            m_Ages.Add(year);
         }
 
         /// <summary>

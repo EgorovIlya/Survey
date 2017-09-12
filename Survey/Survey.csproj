@@ -56,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\SavedProfileReader.cs" />
+    <Compile Include="Utils\UserInput.cs" />
     <Compile Include="WriterAndReaderWorker.cs" />
     <Compile Include="Controllers\Commands\ArchiveMaker.cs" />
     <Compile Include="Controllers\Commands\CommandsList.cs" />

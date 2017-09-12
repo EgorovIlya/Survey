@@ -34,7 +34,7 @@ namespace Survey.Controllers.Commands
         public FileWorker(string userInput,string commandName)
         {
             CommandName = commandName;
-            m_UserInput = userInput;
+            m_UserInput = new UserInput(commandName,userInput);
         }
 
         #endregion Constructors
@@ -55,7 +55,7 @@ namespace Survey.Controllers.Commands
         /// <summary>
         ///     Represents a user input.
         /// </summary>
-        public string UserInput => m_UserInput;
+        public UserInput UserInput => m_UserInput;
 
         /// <summary>
         ///     Represents a path to the result directory. 
@@ -71,30 +71,29 @@ namespace Survey.Controllers.Commands
         /// </summary>
         public void Execute()
         {
-            if (!CheckDir()) return;
+            CheckDir();
             
-            if (m_UserInput.Contains(CommandsList.CommandFind) || m_UserInput.Contains(CommandsList.CommandDelete))
+            if (m_UserInput.CommandName == CommandsList.CommandFind)
             {
-                string fileName = Tools.GetTextWithoutCommand(m_UserInput, CommandName);
-                string fullPath = Path.Combine(PathToResults, $"{fileName}.txt");
-
-                if (!FileTxtExists(fullPath)) return;
-
-                if(m_UserInput.Contains(CommandsList.CommandFind))
-                      VeiwProfile(fullPath);
-
-                if (m_UserInput.Contains(CommandsList.CommandDelete))
-                    File.Delete(fullPath);
+                string fullPath = CheckTextWithoutCommandAndReturnFullPath();
+                VeiwProfile(fullPath);
             }
-            else if (m_UserInput==CommandsList.CommandList  || m_UserInput==CommandsList.CommandListToday)
+
+            else if (m_UserInput.CommandName == CommandsList.CommandDelete)
+            {
+                string fullPath =CheckTextWithoutCommandAndReturnFullPath();
+                File.Delete(fullPath);
+            }
+        
+            else if (m_UserInput.FullText == CommandsList.CommandList)
             {
                 GetFiles(PathToResults);
-
-                if (m_UserInput==CommandsList.CommandList)
-                    GetAllSavedProfile();
-
-                else if (m_UserInput==CommandsList.CommandListToday)
-                    GetTodaySavedProfile();
+                GetAllSavedProfile();
+            }
+            else if (m_UserInput.FullText == CommandsList.CommandListToday)
+            {
+                GetFiles(PathToResults);
+                GetTodaySavedProfile();
             }
             else
             {
@@ -110,12 +109,33 @@ namespace Survey.Controllers.Commands
         /// </summary>
         /// <param name="fullPath">path to the profile</param>
         /// <returns></returns>
-        private bool FileTxtExists(string fullPath)
+        private void FileTxtExists(string fullPath)
         {
            var result = File.Exists(fullPath);
            if (!result)
                 throw new SurveyException(ErrorMessages.FileNotExists);
-           return result;
+        }
+
+
+        /// <summary>
+        ///     Checks 
+        /// </summary>
+        /// <returns></returns>
+        private string  CheckTextWithoutCommandAndReturnFullPath()
+        {
+            if (string.IsNullOrEmpty(m_UserInput.TextWhitoutCommand))
+                throw new SurveyException(ErrorMessages.CommandMustBeWithParametrs);
+
+            string fullPath = FullPath();
+
+            FileTxtExists(fullPath);
+
+            return fullPath;
+        }
+
+        private string FullPath()
+        {
+            return Path.Combine(PathToResults, $"{m_UserInput.TextWhitoutCommand}.txt");
         }
 
         /// <summary>
@@ -124,12 +144,13 @@ namespace Survey.Controllers.Commands
         /// <param name="fullPath">path to the profile</param>
         private void VeiwProfile(string fullPath)
         {
-            using (StreamReader r = new StreamReader(fullPath,  true))
+            SavedProfileReader savedProfile = new SavedProfileReader(fullPath);
+
+            if (savedProfile.ProfileStrings.Any())
             {
-                string srline;
-                while ((srline = r.ReadLine()) != null)
+                foreach (var str in savedProfile.ProfileStrings)
                 {
-                    WriterAndReaderWorker.WriteLine(srline);
+                    WriterAndReaderWorker.WriteLine(str);
                 }
             }
         }
@@ -138,12 +159,11 @@ namespace Survey.Controllers.Commands
         ///     Checks if the directory exists.
         /// </summary>
         /// <returns></returns>
-        private bool CheckDir()
+        private void CheckDir()
         {
             var result = Directory.Exists(PathToResults);
             if (!result)
                throw new SurveyException(ErrorMessages.DirectoryNotExists);
-            return result;
         }
 
         /// <summary>
@@ -164,27 +184,11 @@ namespace Survey.Controllers.Commands
         {
             foreach (var file in m_files)
             {
-                string srline;
-                DateTime dateCreation;
+                SavedProfileReader savedProfile = new SavedProfileReader(file);
 
-                using (StreamReader r = new StreamReader(file, true))
-                {
-                    while ((srline = r.ReadLine()) != null)
-                    {
-                        if (srline.Contains(SurveyConst.ProfileWasCreated))
-                        {
-                            string dateCreationString = Tools.GetAnswerFormSavedProfile(srline, SurveyConst.Separator);
-
-                            if (DateTime.TryParseExact(dateCreationString, SurveyConst.FormatDate,
-                                CultureInfo.CurrentCulture, DateTimeStyles.None, out dateCreation))
-                            {
-                                if (dateCreation >= DateTime.Today
-                                    && dateCreation < DateTime.Today.AddDays(1))
-                                    WriterAndReaderWorker.WriteLine(Path.GetFileNameWithoutExtension(file));
-                            }
-                        }
-                    }
-                }
+                if (savedProfile.DateCreation >= DateTime.Today
+                                    && savedProfile.DateCreation < DateTime.Today.AddDays(1))
+                    WriterAndReaderWorker.WriteLine(Path.GetFileNameWithoutExtension(file));
             }
         }
 
@@ -208,7 +212,7 @@ namespace Survey.Controllers.Commands
         /// <summary>
         ///    User input.
         /// </summary>
-        private readonly string m_UserInput;
+        private readonly UserInput m_UserInput;
 
         #endregion Private Properties
     }
