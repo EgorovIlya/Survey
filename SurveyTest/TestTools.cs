@@ -21,7 +21,7 @@ namespace SurveyTest
             int years = 101;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
@@ -38,7 +38,7 @@ namespace SurveyTest
             int years = 111;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
@@ -55,7 +55,7 @@ namespace SurveyTest
             int years = 52;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
@@ -72,7 +72,7 @@ namespace SurveyTest
             int years = 12;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
@@ -89,7 +89,7 @@ namespace SurveyTest
             int years = 1013;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
@@ -106,7 +106,7 @@ namespace SurveyTest
             int years = 1014;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
@@ -123,7 +123,7 @@ namespace SurveyTest
             int years = 63;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
@@ -140,7 +140,7 @@ namespace SurveyTest
             int years = 1234;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");
@@ -157,7 +157,7 @@ namespace SurveyTest
             int years = 12345;
 
             //Act
-            var actual = Tools.GetYears(years);
+            var actual = years.GetRussianYears();
 
             //Assert
             Assert.AreEqual(expected, actual, $@"Ошибка! Должен быть ""{expected}"", отразилось ""{actual}""");

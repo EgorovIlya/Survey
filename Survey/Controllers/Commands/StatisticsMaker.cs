@@ -150,7 +150,7 @@ namespace Survey.Controllers.Commands
             if (m_Ages.Any())
             {
                 var averageAge = (int)Math.Round(m_Ages.Average(n => n), 0);
-                value =$"{averageAge} {Tools.GetYears(averageAge)}";
+                value =$"{averageAge} {averageAge.GetRussianYears()}";
             }
             WriterAndReaderWorker.WriteLine($"{SurveyConst.OutputMessageAverageAge}{SurveyConst.Separator}{value}");
         }

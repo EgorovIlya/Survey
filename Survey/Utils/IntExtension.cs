@@ -1,16 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Survey.Utils
 {
-
-   public static class Tools
+    public static class IntExtension
     {
-        /// <summary>
-        ///     Returns the text corresponding to the number of years
-        /// </summary>
-        /// <param name="years">the number of years</param>
-        /// <returns>the text</returns>
-        public static string GetYears(int years)
+        public static string GetRussianYears(this int years)
         {
             if ((years - 11) % 100 == 0)
                 return "лет";
@@ -35,8 +33,8 @@ namespace Survey.Utils
 
             if ((years - 4) % 10 == 0)
                 return "года";
-            
-                return "лет";
+
+            return "лет";
         }
     }
 }

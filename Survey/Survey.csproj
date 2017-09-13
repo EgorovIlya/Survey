@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\IntExtension.cs" />
     <Compile Include="Utils\SavedProfileReader.cs" />
     <Compile Include="Utils\UserInput.cs" />
     <Compile Include="WriterAndReaderWorker.cs" />
@@ -87,7 +88,6 @@
     <Compile Include="Utils\ErrorMessages.cs" />
     <Compile Include="Utils\SurveyConst.cs" />
     <Compile Include="Utils\SurveyException.cs" />
-    <Compile Include="Utils\Tools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
