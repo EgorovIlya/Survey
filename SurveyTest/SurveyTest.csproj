@@ -85,7 +85,8 @@
     <Compile Include="TestSavedProfileReader.cs" />
     <Compile Include="TestSaver.cs" />
     <Compile Include="TestStatisticsMaker.cs" />
-    <Compile Include="TestTools.cs" />
+    <Compile Include="TestIntExtension.cs" />
+    <Compile Include="TestUserInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

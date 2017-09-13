@@ -210,7 +210,7 @@ namespace SurveyTest
             }
 
             //Assert
-            Assert.That(() => { m_StatisticMaker.Execute(); ; }, Throws
+            Assert.That(() => { m_StatisticMaker.Execute(); }, Throws
                 .TypeOf<SurveyException>()
                 .And.Message.Contain(ErrorMessages.SavedProfilesNotFound));
         }

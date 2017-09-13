@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Practices.Unity;
-using Survey.Interface;
 
 namespace Survey.Utils
 {
@@ -18,11 +13,12 @@ namespace Survey.Utils
 
         public SavedProfileReader(TextReader savedProfile)
         {
-            m_reader = savedProfile ?? throw new ArgumentNullException(nameof(savedProfile));
-            using (m_reader)
+            TextReader  reader = savedProfile ?? throw new ArgumentNullException(nameof(savedProfile));
+
+            using (reader)
             {
                 string srline;
-                while ((srline = m_reader.ReadLine()) != null)
+                while ((srline = reader.ReadLine()) != null)
                 {
                     if (srline.Contains(SurveyConst.ProfileWasCreated))
                     {
@@ -55,15 +51,15 @@ namespace Survey.Utils
         public string GetAnswerFromSavedProfile(string answer, string separator)
         {
             int lenght = answer.Length;
-            int indexSeparator = answer.IndexOf(separator, StringComparison.Ordinal) + 2;
-            int delta = lenght - indexSeparator;
+            int indexOfSeparator = answer.IndexOf(separator, StringComparison.Ordinal);
 
-            if (indexSeparator > lenght)
+            if (indexOfSeparator == -1)
                 return "";
 
-            return answer.Substring(indexSeparator, delta);
-        }
+            int indexOfAnserBegin = indexOfSeparator + 2;
+            int delta = lenght - indexOfAnserBegin;
 
-        private readonly TextReader m_reader;
+            return answer.Substring(indexOfAnserBegin, delta);
+        }
     }
 }
